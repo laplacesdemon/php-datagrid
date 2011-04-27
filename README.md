@@ -8,17 +8,17 @@ Features
 
 Features of phase1:
 
-# DataSource / provider support
-# Doctrine datasource
-# Array datasource
-# Pluggable system. Plugins are hook codes injected to certain events of the dispatch.
+DataSource / provider support
+Doctrine datasource
+Array datasource
+Pluggable system. Plugins are hook codes injected to certain events of the dispatch.
 
 @todo
 
 Features of phase2:
 
-# Pagination
-# Search Plugin
-# Sorting
+Pagination
+Search Plugin
+Sorting
 
 @todo
