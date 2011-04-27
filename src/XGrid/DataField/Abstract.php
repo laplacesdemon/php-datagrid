@@ -1,9 +1,5 @@
 <?php
 
-  /*
-   * Please see oyunstudyosu license file
-   */
-
   /**
    * Description of Abstract
    *
