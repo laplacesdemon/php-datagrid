@@ -10,7 +10,7 @@
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    * @group grid
    */
-  class OS_Grid_DataSource_ArrayTest extends BaseTestCase {
+  class XGrid_DataSource_ArrayTest extends BaseTestCase {
 
       public function testObjects() {
           
@@ -18,7 +18,7 @@
               array("name" => "Value 11", "surname" => "Value 12"),
               array("name" => "Value 21", "surname" =>  "Value 22")
           );
-          $cls = new OS_Grid_DataSource_Array($data);
+          $cls = new XGrid_DataSource_Array($data);
           
           $this->assertTrue($cls instanceof Iterator);
           $this->assertEquals(2, sizeof($cls));

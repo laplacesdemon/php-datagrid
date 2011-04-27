@@ -10,5 +10,5 @@ require_once 'BaseTestCase.php';
 function __autoload($class_name) {
     $tokens = explode("_", $class_name);
     $fileName = implode("/", $tokens);
-    include_once $fileName . '.php';
+    include_once "../src/" . $fileName . '.php';
 }

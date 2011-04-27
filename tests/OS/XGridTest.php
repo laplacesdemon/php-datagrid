@@ -10,29 +10,29 @@
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    * @group grid
    */
-  class GridTest extends BaseTestCase {
+  class XGridTest extends BaseTestCase {
       
       public function testInstantiation() {
-          $grid = new OS_Grid();
-          $this->assertTrue($grid instanceof OS_Grid_Plugin_Interface);
+          $grid = new XGrid();
+          $this->assertTrue($grid instanceof XGrid_Plugin_Interface);
       }
       
       public function testAddDataField() {
-          $expected = new OS_Grid_DataField_Text();
+          $expected = new XGrid_DataField_Text();
           $expected->setKey("My Key");
           
-          $grid = new OS_Grid();
-          $grid->addDataField("myKeyIndex", "My Key", OS_Grid_DataField::TEXT);
+          $grid = new XGrid();
+          $grid->addDataField("myKeyIndex", "My Key", XGrid_DataField::TEXT);
           
           $this->assertEquals($expected, $grid->getDataField("myKeyIndex")); 
       }
       
       public function testAddDataField2() {
-          $expected = new OS_Grid_DataField_Text();
+          $expected = new XGrid_DataField_Text();
           $expected->setKey("My Key");
           
-          $grid = new OS_Grid();
-          $grid->addDataField("myKeyIndex", "My Key", new OS_Grid_DataField_Text("My Key") );
+          $grid = new XGrid();
+          $grid->addDataField("myKeyIndex", "My Key", new XGrid_DataField_Text("My Key") );
           
           $this->assertEquals($expected, $grid->getDataField("myKeyIndex")); 
       }
@@ -40,12 +40,12 @@
       public function testPrepareHead() {
           $expected = "<table><thead><tr><th>Name</th><th>SurName</th></tr></thead>";
           
-          $grid = new OS_Grid();
-          $grid->addDataField(1, "Name", OS_Grid_DataField::TEXT);
-          $grid->addDataField(2, "SurName", OS_Grid_DataField::TEXT);
+          $grid = new XGrid();
+          $grid->addDataField(1, "Name", XGrid_DataField::TEXT);
+          $grid->addDataField(2, "SurName", XGrid_DataField::TEXT);
           
           
-          $method = self::getMethod("OS_Grid", "_prepareHead");
+          $method = self::getMethod("XGrid", "_prepareHead");
           
           $this->assertEquals($expected, $method->invokeArgs($grid, array()));
           
@@ -58,19 +58,19 @@
           $expected .= "</tbody>";
           
           
-          $grid = new OS_Grid();
-          $grid->addDataField("name", "Name", OS_Grid_DataField::TEXT);
-          $grid->addDataField("surname", "SurName", OS_Grid_DataField::TEXT);
+          $grid = new XGrid();
+          $grid->addDataField("name", "Name", XGrid_DataField::TEXT);
+          $grid->addDataField("surname", "SurName", XGrid_DataField::TEXT);
           
           $data = array(
               array("name" => "Value 11", "surname" => "Value 12"),
               array("name" => "Value 21", "surname" => "Value 22")
           );
-          $dataSource = new OS_Grid_DataSource_Array($data);
+          $dataSource = new XGrid_DataSource_Array($data);
           $grid->setDataSource($dataSource);
           
           
-          $method = self::getMethod("OS_Grid", "_prepareBody");
+          $method = self::getMethod("XGrid", "_prepareBody");
           
           $this->assertEquals($expected, $method->invokeArgs($grid, array()));
       }
@@ -78,12 +78,12 @@
       public function testPrepareFooter() {
           $expected = "<tfoot></tfoot></table>";
           
-          $grid = new OS_Grid();
-          $grid->addDataField(1, "Name", OS_Grid_DataField::TEXT);
-          $grid->addDataField(2, "SurName", OS_Grid_DataField::TEXT);
+          $grid = new XGrid();
+          $grid->addDataField(1, "Name", XGrid_DataField::TEXT);
+          $grid->addDataField(2, "SurName", XGrid_DataField::TEXT);
           
           
-          $method = self::getMethod("OS_Grid", "_prepareFooter");
+          $method = self::getMethod("XGrid", "_prepareFooter");
           
           $this->assertEquals($expected, $method->invokeArgs($grid, array()));
       }
@@ -96,14 +96,14 @@
           $expected .= "</tbody>";
           $expected .= "<tfoot></tfoot></table>";
           
-          $grid = new OS_Grid();
-          $grid->addDataField(1, "Name", OS_Grid_DataField::TEXT);
-          $grid->addDataField(2, "SurName", OS_Grid_DataField::TEXT);
+          $grid = new XGrid();
+          $grid->addDataField(1, "Name", XGrid_DataField::TEXT);
+          $grid->addDataField(2, "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("name" => "Value 11", "surname" => "Value 12"),
               array("name" => "Value 21", "surname" => "Value 22")
           );
-          $dataSource = new OS_Grid_DataSource_Array($data);
+          $dataSource = new XGrid_DataSource_Array($data);
           $grid->setDataSource($dataSource);
           $grid->dispatch();
           
@@ -118,14 +118,14 @@
           $expected .= "</tbody>";
           $expected .= "<tfoot></tfoot></table>";
           
-          $grid = new OS_Grid();
-          $grid->addDataField(1, "Name", OS_Grid_DataField::TEXT);
-          $grid->addDataField(2, "SurName", OS_Grid_DataField::TEXT);
+          $grid = new XGrid();
+          $grid->addDataField(1, "Name", XGrid_DataField::TEXT);
+          $grid->addDataField(2, "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("Value 11", "Value 12"),
               array("Value 21", "Value 22")
           );
-          $dataSource = new OS_Grid_DataSource_Array($data);
+          $dataSource = new XGrid_DataSource_Array($data);
           $grid->setDataSource($dataSource);
           $grid->dispatch();
           
