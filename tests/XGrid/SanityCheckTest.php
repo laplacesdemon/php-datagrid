@@ -1,6 +1,6 @@
 <?php
 /* 
- * Please see oyunstudyosu license file
+ * git@github.com:laplacesdemon/XGrid.git
  */
 
 /**
