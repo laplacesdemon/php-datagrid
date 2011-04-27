@@ -9,7 +9,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class OS_Grid_DataSource_Array implements OS_Grid_DataSource_Interface {
+  class XGrid_DataSource_Array implements XGrid_DataSource_Interface {
    
       /**
        * internal data

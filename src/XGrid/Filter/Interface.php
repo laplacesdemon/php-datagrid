@@ -8,7 +8,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  interface OS_Grid_Filter_Interface {
+  interface XGrid_Filter_Interface {
       
       /**
        * filters the value and returns filtered value

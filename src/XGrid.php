@@ -13,29 +13,29 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class OS_Grid implements OS_Grid_Plugin_Interface {
+  class XGrid implements XGrid_Plugin_Interface {
 
       /**
-       * collection of OS_Grid_Plugin_Interface objects
+       * collection of XGrid_Plugin_Interface objects
        * @var array
        */
       protected $_plugins = array();
       
       /**
-       * Collection of OS_Grid_DataField_Abstract objects
+       * Collection of XGrid_DataField_Abstract objects
        * @var array
        */
       protected $_dataFields;
 
       /**
        * the data adapter
-       * @var OS_Grid_DataSource_Interface
+       * @var XGrid_DataSource_Interface
        */
       protected $_dataSource;
       
       /**
        * the crud strategy for inserting updating and deleting the data
-       * @var OS_Grid_CrudStrategy_Interface
+       * @var XGrid_CrudStrategy_Interface
        */
       protected $_crudStrategy;
       
@@ -47,13 +47,13 @@
       
       /**
        * The html structure helper
-       * @var OS_Grid_HtmlHelper_Interface
+       * @var XGrid_HtmlHelper_Interface
        */
       private $_htmlHelper = null;
             
       public function __construct($htmlHelper = null) {
           $this->_htmlHelper = (is_null($this->_htmlHelper)) ? 
-                  new OS_Grid_HtmlHelper_Default() : $htmlHelper;
+                  new XGrid_HtmlHelper_Default() : $htmlHelper;
       }
 
 
@@ -137,17 +137,17 @@
        * @param type $dataField
        * @param type $options
        * @param type $filters
-       * @return OS_Grid 
+       * @return XGrid 
        */
       public function addDataField($index, $key, $dataField, $options = null, $filters = null) {
-          if($dataField instanceof OS_Grid_DataField_Abstract) {
+          if($dataField instanceof XGrid_DataField_Abstract) {
               $dataField->setKey($key);
               $this->_dataFields[$index] = $dataField;
               return $this;
           }
           
           if(is_string($dataField)) {
-              $this->_dataFields[$index] = OS_Grid_DataField::create($dataField, $key, $options, $filters);
+              $this->_dataFields[$index] = XGrid_DataField::create($dataField, $key, $options, $filters);
           }
           
           return $this;
@@ -157,7 +157,7 @@
        * returns the datafield object 
        * null if not found
        * @param int or string $index
-       * @return OS_Grid_DataField_Abstract or null
+       * @return XGrid_DataField_Abstract or null
        */
       public function getDataField($index) {
           return (isset($this->_dataFields[$index])) ? $this->_dataFields[$index] : 
@@ -170,9 +170,9 @@
       
       /**
        * The data source provides the dataset for the grid body
-       * @param OS_Grid_DataSource_Interface $datasource 
+       * @param XGrid_DataSource_Interface $datasource 
        */
-      public function setDataSource(OS_Grid_DataSource_Interface $datasource) {
+      public function setDataSource(XGrid_DataSource_Interface $datasource) {
           $this->_dataSource = $datasource;
           return $this;
       }
@@ -181,7 +181,7 @@
           return $this->_dataSource;
       }
       
-      public function setHtmlHelper(OS_Grid_HtmlHelper_Interface $helper) {
+      public function setHtmlHelper(XGrid_HtmlHelper_Interface $helper) {
           $this->_htmlHelper = $helper;
       }
       

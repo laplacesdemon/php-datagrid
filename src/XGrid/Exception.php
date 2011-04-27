@@ -5,9 +5,10 @@
    */
 
   /**
+   * Description of Exception
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  interface OS_Grid_CrudStrategy_Interface {
+  class XGrid_Exception extends Exception {
       
   }

@@ -9,7 +9,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class OS_Grid_Filter_Uppercase implements OS_Grid_Filter_Interface {
+  class XGrid_Filter_Uppercase implements XGrid_Filter_Interface {
       
       public function filter($value) {
           return strtoupper($value);

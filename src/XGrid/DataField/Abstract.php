@@ -9,7 +9,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  abstract class OS_Grid_DataField_Abstract implements OS_Grid_Filter_Interface {
+  abstract class XGrid_DataField_Abstract implements XGrid_Filter_Interface {
    
       /**
        * The data key, used on the table header
@@ -25,7 +25,7 @@
       protected $_options = array();
       
       /**
-       * Collection of OS_Grid_Filter_Interface objects
+       * Collection of XGrid_Filter_Interface objects
        * @var array
        */
       protected $_filters = array();
@@ -33,7 +33,7 @@
       /**
        * The setter of datafield key, used for the identifier of the data column
        * @param type $key
-       * @return OS_Grid_DataField_Abstract 
+       * @return XGrid_DataField_Abstract 
        */
       public function setKey($key) {
           $this->_key = $key;
@@ -51,7 +51,7 @@
       /**
        * Array of options. Options are simple key value pairs
        * @param array $options 
-       * @return OS_Grid_DataField_Abstract 
+       * @return XGrid_DataField_Abstract 
        */
       public function setOptions($options) {
           $this->_options = $options;
@@ -62,7 +62,7 @@
        * Add a single option
        * @param string $key
        * @param string $value
-       * @return OS_Grid_DataField_Abstract 
+       * @return XGrid_DataField_Abstract 
        */
       public function addOption($key, $value) {
           $this->_options[$key] = $value;
@@ -78,7 +78,7 @@
       }
       
       /**
-       * Collection of OS_Grid_Filter_Interface objects
+       * Collection of XGrid_Filter_Interface objects
        * @param array $filters 
        */
       public function setFilters($filters) {
@@ -88,10 +88,10 @@
       
       /**
        * Adds a sinle filter object
-       * @param OS_Grid_Filter_Interface $filter
-       * @return OS_Grid_DataField_Abstract 
+       * @param XGrid_Filter_Interface $filter
+       * @return XGrid_DataField_Abstract 
        */
-      public function addFilter(OS_Grid_Filter_Interface $filter) {
+      public function addFilter(XGrid_Filter_Interface $filter) {
           array_push($this->_filters, $filter);
           return $this;
       }
@@ -101,7 +101,7 @@
       }
 
       /**
-       * implements the OS_Grid_Filter_Interface
+       * implements the XGrid_Filter_Interface
        * @param string $value 
        */
       public function filter($value) {

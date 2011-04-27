@@ -8,7 +8,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  interface OS_Grid_Plugin_Interface {
+  interface XGrid_Plugin_Interface {
    
       /**
        * Hook method

@@ -5,10 +5,9 @@
    */
 
   /**
-   * DataSource adapter interface
-   * 
+   *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  interface OS_Grid_DataSource_Interface extends Countable, Iterator {
+  interface XGrid_CrudStrategy_Interface {
       
   }

@@ -5,10 +5,10 @@
    */
 
   /**
-   * Description of Exception
-   *
+   * DataSource adapter interface
+   * 
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class OS_Grid_Exception extends Exception {
+  interface XGrid_DataSource_Interface extends Countable, Iterator {
       
   }

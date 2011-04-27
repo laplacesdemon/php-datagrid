@@ -9,7 +9,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class OS_Grid_DataField_Text extends OS_Grid_DataField_Abstract {
+  class XGrid_DataField_Text extends XGrid_DataField_Abstract {
          
       public function __construct($key = null) {
           if(!is_null($key)) $this->_key = $key;

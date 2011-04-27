@@ -9,16 +9,32 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class OS_Grid_HtmlHelper_Default implements OS_Grid_HtmlHelper_Interface {
+  class XGrid_HtmlHelper_DefaultClasses implements XGrid_HtmlHelper_Interface {
+  
+      private $_options = array(
+          "tableClass" => "",
+          "headClass" => "",
+          "bodyClass" => "",
+          "footerClass" => "",
+          "trClass" => "",
+          "trOddClass" => "",
+          "trEvenClass" => "",
+          "thClass" => "",
+          "tdClass" => ""
+      );
+      
+      public function __construct($options = array()) {
+          // @todo
+      }
       
       public function closeBody() {
-          return "</tbody>";
+          return "</body>";
       }
       public function closeBodyField() {
           return "</td>";
       }
       public function closeBodyRow() {
-          return "</tr>";
+          return "</tbody>";
       }
       public function closeFooter() {
           return "</tfoot>";
@@ -57,7 +73,7 @@
           return "<tr>";
       }
       public function createHead() {
-          return "<thead>";
+          return "<table>";
       }
       public function createHeadField() {
           return "<th>";
@@ -66,10 +82,10 @@
           return "<tr>";
       }
       public function createTable() {
-          return "<table>";
+          return "<table class='" . $this->_options[""] . "' >";
       }
 
       public function closeTable() {
-          return "</table>";
+          
       }
   }

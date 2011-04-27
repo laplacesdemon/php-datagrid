@@ -8,7 +8,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  interface OS_Grid_HtmlHelper_Interface {
+  interface XGrid_HtmlHelper_Interface {
 
       public function createTable();
       
