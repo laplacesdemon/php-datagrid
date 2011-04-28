@@ -50,6 +50,10 @@
        * @var XGrid_HtmlHelper_Interface
        */
       private $_htmlHelper = null;
+      
+      private $_pagination_currentPage = null;
+      
+      private $_pagination_itemCountPerPage = null;
             
       public function __construct($htmlHelper = null) {
           $this->_htmlHelper = (is_null($this->_htmlHelper)) ? 
@@ -75,6 +79,11 @@
        * returns the grid object
        */
       public function dispatch() {
+          if(is_null($this->getDataSource()))
+                  throw new XGrid_Exception("No data source found. Please set one");
+          
+          $this->_createPagination();
+          
           $this->preDispatch();
           $this->_prepareHead();
           $this->_prepareBody();
@@ -107,7 +116,7 @@
        */
       protected function _prepareBody() {
           $this->_xhtmlParts["body"] = $this->_htmlHelper->createBody(); // <tbody>
-          foreach ($this->getDataSource() as $data) {
+          foreach ($this->getDataSource()->getIterator() as $data) {
               $this->_xhtmlParts["body"] .= $this->_htmlHelper->createBodyRow(); // <tr>
               foreach ($data as $item) {
                   $this->_xhtmlParts["body"] .= $this->_htmlHelper->createBodyField(); // <td>
@@ -147,7 +156,8 @@
           }
           
           if(is_string($dataField)) {
-              $this->_dataFields[$index] = XGrid_DataField::create($dataField, $key, $options, $filters);
+              $this->_dataFields[$index] = 
+                      XGrid_DataField::create($dataField, $key, $options, $filters);
           }
           
           return $this;
@@ -170,19 +180,53 @@
       
       /**
        * The data source provides the dataset for the grid body
-       * @param XGrid_DataSource_Interface $datasource 
+       * @param XGrid_DataSource_Abstract $datasource 
        */
       public function setDataSource(XGrid_DataSource_Interface $datasource) {
           $this->_dataSource = $datasource;
           return $this;
       }
       
+      /**
+       *
+       * @return XGrid_DataSource_Abstract 
+       */
       public function getDataSource() {
           return $this->_dataSource;
       }
       
       public function setHtmlHelper(XGrid_HtmlHelper_Interface $helper) {
           $this->_htmlHelper = $helper;
+      }
+      
+      public function hasPagination() {
+          return is_null($this->_pagination_currentPage) ? false : true;
+      }
+      
+      /**
+       * Pagination settings
+       * Use constants in XGrid_Pagination class for the $type 
+       * 
+       * @param integer $currentPage the current page value
+       * @param integer $itemsPerPage count of items per page
+       * @param string $type 
+       * @param integer $range 
+       * @return XGrid 
+       */
+      public function setPagination($currentPage = 1, $itemsPerPage = 20, 
+              $type = XGrid_Pagination::ELASTIC, $range = 6) 
+      {
+          $this->_pagination_currentPage = $currentPage;
+          $this->_pagination_itemCountPerPage = $itemsPerPage;
+          //@todo set type and range
+          return $this;
+      }
+      
+      private function _createPagination() {
+          $pagination = XGrid_Pagination_Factory::create($this->getDataSource());
+          $pagination->setCurrentPage($this->_pagination_currentPage);
+          $pagination->setItemCountPerPage($this->_pagination_itemCountPerPage);
+          $this->setDataSource($pagination);
       }
       
       /**
