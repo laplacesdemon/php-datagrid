@@ -16,10 +16,10 @@
           
           $datasource = new XGrid_DataSource_Array(array());
           
-          $paginator = XGrid_Pagination_Factory::create($datasource);
+          $paginator = XGrid_Plugin_Pagination_Factory::create($datasource);
           
-          $this->assertTrue($paginator instanceof XGrid_Pagination_Abstract);
-          $this->assertTrue($paginator instanceof XGrid_Pagination_Array);
+          $this->assertTrue($paginator instanceof XGrid_Plugin_Pagination_Abstract);
+          $this->assertTrue($paginator instanceof XGrid_Plugin_Pagination_Array);
           
       }
       

@@ -162,8 +162,14 @@
           $currentPage = 3;
           $perPage = 2;
           $range = 6;
-          $type = XGrid_Pagination::SLIDING;
-          $grid->setPagination($currentPage, $perPage, $type, $range);
+          $type = XGrid_Plugin_Pagination::SLIDING;
+          $paginator = new XGrid_Plugin_DefaultPaginator();
+          $paginator->setCurrentPage($currentPage);
+          $paginator->setItemCountPerPage($perPage);
+          $paginator->setRange($range);
+          $paginator->setType($type);
+          
+          $grid->registerPlugin($paginator);
           
           $grid->dispatch();
           
@@ -191,6 +197,8 @@
           
           $this->assertEquals($expected, $grid->__toString());
       }
+      
+      
       
   }
 

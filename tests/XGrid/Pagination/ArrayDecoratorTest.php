@@ -23,12 +23,12 @@
           );
           $datasource = new XGrid_DataSource_Array($data);
           
-          $paginator = new XGrid_Pagination_Array($datasource);
+          $paginator = new XGrid_Plugin_Pagination_Array($datasource);
           $paginator->setCurrentPage(2); // the page offset, we're at 2nd page
           $paginator->setItemCountPerPage(2); // there will be 2 items on per page
           
           $this->assertTrue($paginator instanceof XGrid_DataSource_Interface);
-          $this->assertTrue($paginator instanceof XGrid_Pagination_Abstract);
+          $this->assertTrue($paginator instanceof XGrid_Plugin_Pagination_Abstract);
           
           $iterator = $paginator->getIterator();
           $this->assertEquals("c1", $iterator->current()->va1);
