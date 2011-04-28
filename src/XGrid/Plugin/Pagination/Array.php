@@ -12,7 +12,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class XGrid_Pagination_Array extends XGrid_Pagination_Abstract {
+  class XGrid_Plugin_Pagination_Array extends XGrid_Plugin_Pagination_Abstract {
 
       private $_datasource;
 

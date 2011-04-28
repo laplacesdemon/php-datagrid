@@ -9,22 +9,22 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class XGrid_Pagination_Factory {
+  class XGrid_Plugin_Pagination_Factory {
 
       /**
        * creates the right pagination concreate class for the datasource
        * 
        * @param XGrid_DataSource_Interface $datasource
-       * @return XGrid_Pagination_Abstract 
+       * @return XGrid_Plugin_Pagination_Abstract 
        */
       public static function create(XGrid_DataSource_Interface $datasource) {
           $ins = null;
           switch ($datasource) {
               case $datasource instanceof XGrid_DataSource_Array:
-                  $ins = new XGrid_Pagination_Array($datasource);
+                  $ins = new XGrid_Plugin_Pagination_Array($datasource);
                   break;
               case $datasource instanceof XGrid_DataSource_Doctrine:
-                  $ins = new XGrid_Pagination_Doctrine($datasource);
+                  $ins = new XGrid_Plugin_Pagination_Doctrine($datasource);
                   break;
           }
           

@@ -1,4 +1,5 @@
 <?php
+
   /**
    * Fully functional data grid
    * 
@@ -20,46 +21,45 @@
        * @var array
        */
       protected $_plugins = array();
-      
       /**
        * Collection of XGrid_DataField_Abstract objects
        * @var array
        */
       protected $_dataFields;
-
       /**
        * the data adapter
        * @var XGrid_DataSource_Interface
        */
       protected $_dataSource;
-      
       /**
        * the crud strategy for inserting updating and deleting the data
        * @var XGrid_CrudStrategy_Interface
        */
       protected $_crudStrategy;
-      
       /**
        * xhtml parts for header, body and footer
        * @var array
        */
       private $_xhtmlParts = "";
-      
       /**
        * The html structure helper
        * @var XGrid_HtmlHelper_Interface
        */
       private $_htmlHelper = null;
-      
-      private $_pagination_currentPage = null;
-      
-      private $_pagination_itemCountPerPage = null;
-            
+      private $_isDispatched = false;
+
       public function __construct($htmlHelper = null) {
-          $this->_htmlHelper = (is_null($this->_htmlHelper)) ? 
+          $this->_htmlHelper = (is_null($this->_htmlHelper)) ?
                   new XGrid_HtmlHelper_Default() : $htmlHelper;
+
+          $this->init();
       }
 
+      public function init() {
+          foreach ($this->_plugins as $plugin) {
+              $plugin->init();
+          }
+      }
 
       public function postDispatch() {
           foreach ($this->_plugins as $plugin) {
@@ -72,26 +72,53 @@
               $plugin->preDispatch();
           }
       }
-      
+
+      /**
+       * Pushes the plugin to the stack
+       * @param XGrid_Plugin_Abstract $plugin 
+       */
+      public function registerPlugin(XGrid_Plugin_Abstract $plugin) {
+          $plugin->setXgrid($this);
+          array_push($this->_plugins, $plugin);
+          return $this;
+      }
+
+      /**
+       * Removes plugin from the stack
+       * @param XGrid_Plugin_Abstract $plugin
+       * @return XGrid 
+       */
+      public function removePlugin(XGrid_Plugin_Abstract $plugin) {
+          foreach ($this->_plugins as $i => $p) {
+              if ($plugin == $p)
+                  unset($this->_plugins[$i]);
+          }
+          return $this;
+      }
+
+      public function isDispatched() {
+          return $this->_isDispatched;
+      }
+
       /**
        * Dispatches the grid by creating the xhtml structure
        * During the dispatch, runs the hook methods
        * returns the grid object
        */
       public function dispatch() {
-          if(is_null($this->getDataSource()))
-                  throw new XGrid_Exception("No data source found. Please set one");
-          
-          $this->_createPagination();
-          
+          if (is_null($this->getDataSource()))
+              throw new XGrid_Exception("No data source found. Please set one");
+
           $this->preDispatch();
           $this->_prepareHead();
           $this->_prepareBody();
           $this->_prepareFooter();
           $this->postDispatch();
+
+          $this->_isDispatched = true;
           return $this;
       }
-      
+
       /**
        * Prepares the header part of the grid
        * Iterates through all registered data fields
@@ -108,8 +135,8 @@
           $this->_xhtmlParts["head"] .= $this->_htmlHelper->closeHeadRow(); // </tr>
           $this->_xhtmlParts["head"] .= $this->_htmlHelper->closeHead(); // </thead>
           return $this->_xhtmlParts["head"];
-      } 
-      
+      }
+
       /**
        * Prepares the body part of the grid
        * Iterates through all items
@@ -120,19 +147,19 @@
               $this->_xhtmlParts["body"] .= $this->_htmlHelper->createBodyRow(); // <tr>
               foreach ($this->_dataFields as $datafield) {
                   $this->_xhtmlParts["body"] .= $this->_htmlHelper->createBodyField(); // <td>
-                  
+
                   $this->_xhtmlParts["body"] .= $data->{$datafield->getKey()};
-                  
+
                   $this->_xhtmlParts["body"] .= $this->_htmlHelper->closeBodyField(); // </td>
               }
-              
-              
+
+
               $this->_xhtmlParts["body"] .= $this->_htmlHelper->closeBodyRow();
           }
           $this->_xhtmlParts["body"] .= $this->_htmlHelper->closeBody(); // </tbody>
-          return $this->_xhtmlParts["body"]; 
+          return $this->_xhtmlParts["body"];
       }
-      
+
       /**
        * Prepares the footer part
        */
@@ -142,7 +169,7 @@
           $this->_xhtmlParts["footer"] .= $this->_htmlHelper->closeTable(); // </table>
           return $this->_xhtmlParts["footer"];
       }
-      
+
       /**
        *
        * @param type $index
@@ -153,21 +180,21 @@
        * @return XGrid 
        */
       public function addDataField($index, $title, $dataField, $options = null, $filters = null) {
-          if($dataField instanceof XGrid_DataField_Abstract) {
+          if ($dataField instanceof XGrid_DataField_Abstract) {
               $dataField->setKey($index);
               $dataField->setTitle($title);
               $this->_dataFields[$index] = $dataField;
               return $this;
           }
-          
-          if(is_string($dataField)) {
-              $this->_dataFields[$index] = 
+
+          if (is_string($dataField)) {
+              $this->_dataFields[$index] =
                       XGrid_DataField::create($dataField, $index, $title, $options, $filters);
           }
-          
+
           return $this;
       }
-      
+
       /**
        * returns the datafield object 
        * null if not found
@@ -175,14 +202,14 @@
        * @return XGrid_DataField_Abstract or null
        */
       public function getDataField($index) {
-          return (isset($this->_dataFields[$index])) ? $this->_dataFields[$index] : 
-              null;
+          return (isset($this->_dataFields[$index])) ? $this->_dataFields[$index] :
+                  null;
       }
-      
+
       public function getDataFields() {
           return $this->_dataFields;
       }
-      
+
       /**
        * The data source provides the dataset for the grid body
        * @param XGrid_DataSource_Abstract $datasource 
@@ -191,7 +218,7 @@
           $this->_dataSource = $datasource;
           return $this;
       }
-      
+
       /**
        *
        * @return XGrid_DataSource_Interface 
@@ -199,47 +226,32 @@
       public function getDataSource() {
           return $this->_dataSource;
       }
-      
+
       public function setHtmlHelper(XGrid_HtmlHelper_Interface $helper) {
           $this->_htmlHelper = $helper;
       }
-      
-      public function hasPagination() {
-          return is_null($this->_pagination_currentPage) ? false : true;
-      }
-      
+
       /**
-       * Pagination settings
-       * Use constants in XGrid_Pagination class for the $type 
-       * 
-       * @param integer $currentPage the current page value
-       * @param integer $itemsPerPage count of items per page
-       * @param string $type 
-       * @param integer $range 
-       * @return XGrid 
+       *
+       * @return boolean
+       * @todo implemented
        */
-      public function setPagination($currentPage = 1, $itemsPerPage = 20, 
-              $type = XGrid_Pagination::ELASTIC, $range = 6) 
-      {
-          $this->_pagination_currentPage = $currentPage;
-          $this->_pagination_itemCountPerPage = $itemsPerPage;
-          //@todo set type and range
-          return $this;
+      public function hasPagination() {
+          // return true if pagination plugin registered
+          return false;
       }
-      
-      private function _createPagination() {
-          $pagination = XGrid_Pagination_Factory::create($this->getDataSource());
-          $pagination->setCurrentPage($this->_pagination_currentPage);
-          $pagination->setItemCountPerPage($this->_pagination_itemCountPerPage);
-          $this->setDataSource($pagination);
-      }
-      
+
       /**
        * The magic function to return grid xhtml
        * @return String
        */
       public function __toString() {
-          return implode("", $this->_xhtmlParts);          
+          if (!$this->isDispatched()) {
+              //throw new XGrid_Exception("XGrid is not dispatched");
+              $this->dispatch();
+          }
+
+          return implode("", $this->_xhtmlParts);
       }
 
   }

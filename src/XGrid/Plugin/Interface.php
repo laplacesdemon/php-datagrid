@@ -12,7 +12,14 @@
    
       /**
        * Hook method
-       * called before the dispatch() method. 
+       * Called during the early instantiation of the XGrid
+       */
+      public function init();
+      
+      /**
+       * Hook method
+       * called after the initialization is complete 
+       * and before the dispatch() method. 
        * it can be use for setting additional parameters
        */
       public function preDispatch();

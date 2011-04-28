@@ -9,7 +9,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  abstract class XGrid_Pagination_Abstract implements XGrid_DataSource_Interface {
+  abstract class XGrid_Plugin_Pagination_Abstract implements XGrid_DataSource_Interface {
    
       /**
        * 
