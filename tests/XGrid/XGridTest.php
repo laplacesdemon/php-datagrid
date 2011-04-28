@@ -132,5 +132,39 @@
           $this->assertEquals($expected, $grid->__toString());
       }
       
+      public function testPagination() {
+          $expected = "<table><thead><tr><th>Name</th><th>SurName</th></tr></thead>";
+          $expected .= "<tbody>";
+          $expected .= "<tr><td>Value 11</td><td>Value 12</td></tr>";
+          $expected .= "<tr><td>Value 21</td><td>Value 22</td></tr>";
+          $expected .= "</tbody>";
+          $expected .= "<tfoot></tfoot></table>";
+          
+          $grid = new XGrid();
+          $grid->addDataField(1, "Name", XGrid_DataField::TEXT);
+          $grid->addDataField(2, "SurName", XGrid_DataField::TEXT);
+          $data = array(
+              array("Value 01", "Value 00"),
+              array("Value 02", "Value 00"),
+              array("Value 03", "Value 00"),
+              array("Value 04", "Value 00"),
+              array("Value 11", "Value 12"),
+              array("Value 21", "Value 22")
+          );
+          $dataSource = new XGrid_DataSource_Array($data);
+          $grid->setDataSource($dataSource);
+          
+          $currentPage = 3;
+          $perPage = 2;
+          $range = 6;
+          $type = XGrid_Pagination::SLIDING;
+          $grid->setPagination($currentPage, $perPage, $type, $range);
+          
+          $grid->dispatch();
+          
+          $this->assertEquals($expected, $grid->__toString());
+          
+      }
+      
   }
 
