@@ -8,9 +8,14 @@
   abstract class XGrid_DataField_Abstract implements XGrid_Filter_Interface {
    
       /**
-       * The data key, used on the table header
-       * as well as the identifier for the data column
+       * The data title, used on the table header
        * @var String
+       */
+      protected $_title;
+      
+      /**
+       * The data key, used as tjhe unique identifier of a column
+       * @var string
        */
       protected $_key;
       
@@ -42,6 +47,22 @@
        */
       public function getKey() {
           return $this->_key;
+      }
+      
+      /**
+       * the title of the data column
+       * @return string
+       */
+      public function getTitle() {
+          return $this->_title;
+      }
+
+      /**
+       * The setter of the data column title.
+       * @param string $_title 
+       */
+      public function setTitle($_title) {
+          $this->_title = $_title;
       }
       
       /**

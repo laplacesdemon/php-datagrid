@@ -102,7 +102,7 @@
           $this->_xhtmlParts["head"] .= $this->_htmlHelper->createHeadRow(); // <tr>
           foreach ($this->_dataFields as $dataField) {
               $this->_xhtmlParts["head"] .= $this->_htmlHelper->createHeadField(); // <td>
-              $this->_xhtmlParts["head"] .= $dataField->getKey();
+              $this->_xhtmlParts["head"] .= $dataField->getTitle();
               $this->_xhtmlParts["head"] .= $this->_htmlHelper->closeHeadField(); // </td>
           }
           $this->_xhtmlParts["head"] .= $this->_htmlHelper->closeHeadRow(); // </tr>
@@ -118,11 +118,15 @@
           $this->_xhtmlParts["body"] = $this->_htmlHelper->createBody(); // <tbody>
           foreach ($this->getDataSource()->getIterator() as $data) {
               $this->_xhtmlParts["body"] .= $this->_htmlHelper->createBodyRow(); // <tr>
-              foreach ($data as $item) {
+              foreach ($this->_dataFields as $datafield) {
                   $this->_xhtmlParts["body"] .= $this->_htmlHelper->createBodyField(); // <td>
-                  $this->_xhtmlParts["body"] .= $item;
+                  
+                  $this->_xhtmlParts["body"] .= $data->{$datafield->getKey()};
+                  
                   $this->_xhtmlParts["body"] .= $this->_htmlHelper->closeBodyField(); // </td>
               }
+              
+              
               $this->_xhtmlParts["body"] .= $this->_htmlHelper->closeBodyRow();
           }
           $this->_xhtmlParts["body"] .= $this->_htmlHelper->closeBody(); // </tbody>
@@ -148,16 +152,17 @@
        * @param type $filters
        * @return XGrid 
        */
-      public function addDataField($index, $key, $dataField, $options = null, $filters = null) {
+      public function addDataField($index, $title, $dataField, $options = null, $filters = null) {
           if($dataField instanceof XGrid_DataField_Abstract) {
-              $dataField->setKey($key);
+              $dataField->setKey($index);
+              $dataField->setTitle($title);
               $this->_dataFields[$index] = $dataField;
               return $this;
           }
           
           if(is_string($dataField)) {
               $this->_dataFields[$index] = 
-                      XGrid_DataField::create($dataField, $key, $options, $filters);
+                      XGrid_DataField::create($dataField, $index, $title, $options, $filters);
           }
           
           return $this;
@@ -189,7 +194,7 @@
       
       /**
        *
-       * @return XGrid_DataSource_Abstract 
+       * @return XGrid_DataSource_Interface 
        */
       public function getDataSource() {
           return $this->_dataSource;

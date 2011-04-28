@@ -24,7 +24,7 @@
        * @param array $filters 
        * @return XGrid_DataField_Abstract
        */
-      public static function create($type, $key, $options = null, $filters = null) {
+      public static function create($type, $key, $title, $options = null, $filters = null) {
           $cls = null;
           
           switch ($type) {
@@ -40,6 +40,7 @@
               throw new XGrid_Exception("Unknown data field type: " . $type);
               
           $cls->setKey($key);
+          $cls->setTitle($title);
           
           if(!is_null($options))
               $cls->setOptions($options);
