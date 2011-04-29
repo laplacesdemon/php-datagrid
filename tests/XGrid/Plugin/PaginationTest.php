@@ -8,7 +8,7 @@
    * Description of PaginationTest
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
-   * @group tmp
+   * @group none
    */
   class XGrid_Plugin_PaginationTest extends BaseTestCase {
       
