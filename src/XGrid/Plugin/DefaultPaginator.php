@@ -79,10 +79,6 @@
           // nothing to init
       }
       
-      public function postDispatch() {
-          // nothing to add
-      }
-      
       public function preDispatch() {
           $this->_paginator = XGrid_Plugin_Pagination_Factory::create($this->getXgrid()->getDataSource());
           $this->_paginator->setCurrentPage($this->getCurrentPage());
@@ -91,6 +87,8 @@
           $this->getXgrid()->setDataSource($this->_paginator);
       }
 
-      
+      public function postDispatch() {
+          // nothing to add
+      }
   }
 

@@ -5,7 +5,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  abstract class XGrid_DataField_Abstract implements XGrid_Filter_Interface {
+  abstract class XGrid_DataField_Abstract implements XGrid_Filter_Interface, XGrid_HtmlHelper_Renderable {
    
       /**
        * The data title, used on the table header
@@ -127,10 +127,5 @@
           }
           return $value;
       }
-
-      /**
-       * Returns the xhtml output
-       */
-      public abstract function render();
       
   }

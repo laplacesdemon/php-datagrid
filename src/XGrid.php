@@ -36,22 +36,19 @@
        * @var XGrid_CrudStrategy_Interface
        */
       protected $_crudStrategy;
-      /**
-       * xhtml parts for header, body and footer
-       * @var array
-       */
-      private $_xhtmlParts = "";
+      
       /**
        * The html structure helper
        * @var XGrid_HtmlHelper_Interface
        */
       private $_htmlHelper = null;
+      
       private $_isDispatched = false;
 
       public function __construct($htmlHelper = null) {
           $this->_htmlHelper = (is_null($this->_htmlHelper)) ?
                   new XGrid_HtmlHelper_Default() : $htmlHelper;
-
+          
           $this->init();
       }
 
@@ -109,65 +106,17 @@
           if (is_null($this->getDataSource()))
               throw new XGrid_Exception("No data source found. Please set one");
 
+          
           $this->preDispatch();
-          $this->_prepareHead();
-          $this->_prepareBody();
-          $this->_prepareFooter();
+          
+          $this->_htmlHelper->setData($this->getDataSource());
+          $this->_htmlHelper->setColumns($this->getDataFields());
+          $this->_htmlHelper->init();
+          
           $this->postDispatch();
 
           $this->_isDispatched = true;
           return $this;
-      }
-
-      /**
-       * Prepares the header part of the grid
-       * Iterates through all registered data fields
-       */
-      protected function _prepareHead() {
-          $this->_xhtmlParts["head"] = $this->_htmlHelper->createTable(); // <table>
-          $this->_xhtmlParts["head"] .= $this->_htmlHelper->createHead(); // <thead>
-          $this->_xhtmlParts["head"] .= $this->_htmlHelper->createHeadRow(); // <tr>
-          foreach ($this->_dataFields as $dataField) {
-              $this->_xhtmlParts["head"] .= $this->_htmlHelper->createHeadField(); // <td>
-              $this->_xhtmlParts["head"] .= $dataField->getTitle();
-              $this->_xhtmlParts["head"] .= $this->_htmlHelper->closeHeadField(); // </td>
-          }
-          $this->_xhtmlParts["head"] .= $this->_htmlHelper->closeHeadRow(); // </tr>
-          $this->_xhtmlParts["head"] .= $this->_htmlHelper->closeHead(); // </thead>
-          return $this->_xhtmlParts["head"];
-      }
-
-      /**
-       * Prepares the body part of the grid
-       * Iterates through all items
-       */
-      protected function _prepareBody() {
-          $this->_xhtmlParts["body"] = $this->_htmlHelper->createBody(); // <tbody>
-          foreach ($this->getDataSource()->getIterator() as $data) {
-              $this->_xhtmlParts["body"] .= $this->_htmlHelper->createBodyRow(); // <tr>
-              foreach ($this->_dataFields as $datafield) {
-                  $this->_xhtmlParts["body"] .= $this->_htmlHelper->createBodyField(); // <td>
-
-                  $this->_xhtmlParts["body"] .= $data->{$datafield->getKey()};
-
-                  $this->_xhtmlParts["body"] .= $this->_htmlHelper->closeBodyField(); // </td>
-              }
-
-
-              $this->_xhtmlParts["body"] .= $this->_htmlHelper->closeBodyRow();
-          }
-          $this->_xhtmlParts["body"] .= $this->_htmlHelper->closeBody(); // </tbody>
-          return $this->_xhtmlParts["body"];
-      }
-
-      /**
-       * Prepares the footer part
-       */
-      protected function _prepareFooter() {
-          $this->_xhtmlParts["footer"] = $this->_htmlHelper->createFooter(); // <tfoot>
-          $this->_xhtmlParts["footer"] .= $this->_htmlHelper->closeFooter(); // </thead>
-          $this->_xhtmlParts["footer"] .= $this->_htmlHelper->closeTable(); // </table>
-          return $this->_xhtmlParts["footer"];
       }
 
       /**
@@ -251,7 +200,7 @@
               $this->dispatch();
           }
 
-          return implode("", $this->_xhtmlParts);
+          return $this->_htmlHelper->render();
       }
 
   }

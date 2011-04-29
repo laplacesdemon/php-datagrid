@@ -18,5 +18,7 @@
 
       public function render() {
           
+          return $this->getTitle();
+          
       }
   }

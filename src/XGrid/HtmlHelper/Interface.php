@@ -8,45 +8,32 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  interface XGrid_HtmlHelper_Interface {
+  interface XGrid_HtmlHelper_Interface extends XGrid_HtmlHelper_Renderable {
 
-      public function createTable();
+      /**
+       * if the $index param is null, appends at the end of rows
+       * otherwise inserts it after the specified row
+       */
+      public function append($data, $index = null);
       
-      public function closeTable();
+      /**
+       * prepends the data before the content
+       */
+      public function prepend($data, $index = null);
       
-      public function createHead();
+      /**
+       * The item value
+       */
+      public function setValue($data);
       
-      public function closeHead();
+      /**
+       * The main tag
+       */
+      public function setTag($tag);
       
-      public function createHeadRow();
+      /**
+       * The attribute for the main tag
+       */
+      public function addAttribute($key, $value);
       
-      public function closeHeadRow();
-      
-      public function createHeadField();
-      
-      public function closeHeadField();
-      
-      public function createBody();
-      
-      public function closeBody();
-      
-      public function createBodyRow();
-      
-      public function closeBodyRow();
-      
-      public function createBodyField();
-      
-      public function closeBodyField();
-      
-      public function createFooter();
-      
-      public function closeFooter();
-      
-      public function createFooterRow();
-      
-      public function closeFooterRow();
-      
-      public function createFooterField();
-      
-      public function closeFooterField();
   }
