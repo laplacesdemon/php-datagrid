@@ -92,7 +92,13 @@
           $expected .= "<tr><td>Value 11</td><td>Value 12</td></tr>";
           $expected .= "<tr><td>Value 21</td><td>Value 22</td></tr>";
           $expected .= "</tbody>";
-          $expected .= "<tfoot></tfoot></table>";
+          $expected .= "<tfoot>";
+          $expected .= "<div class='paginationControl'>" .
+                       "<a href='http://localhost/test?p=2'>&lt; Previous</a> | " . 
+                       "<a href='http://localhost/test?p=1'>1</a> | " . 
+                       "<a href='http://localhost/test?p=2'>2</a> | 3 | " . 
+                       "<span class='disabled'>&gt; Next</span></div>";
+          $expected .= "</tfoot></table>";
           
           $grid = new XGrid();
           $grid->addDataField("name", "Name", XGrid_DataField::TEXT);
@@ -117,6 +123,7 @@
           $paginator->setItemCountPerPage($perPage);
           $paginator->setRange($range);
           $paginator->setType($type);
+          $paginator->setBaseUrl("http://localhost/test");
           
           $grid->registerPlugin($paginator);
           
