@@ -9,7 +9,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class XGrid_HtmlHelper_Default extends XGrid_HtmlHelper_Item {
+  class XGrid_HtmlHelper_Default extends XGrid_HtmlHelper_Item implements XGrid_HtmlHelper_CollectionInterface {
 
       /**
        *
@@ -31,14 +31,14 @@
       
       /**
        *
-       * @var XGrid_HtmlHelper_TableHeader
+       * @var XGrid_HtmlHelper_TableBody
        */
       private $_body;
       
       
       /**
        *
-       * @var XGrid_HtmlHelper_TableHeader
+       * @var XGrid_HtmlHelper_TableFooter
        */
       private $_footer;
 
@@ -62,6 +62,10 @@
           $this->_dataFields = $datafields;
       }
       
+      /**
+       *
+       * @return XGrid_HtmlHelper_TableHeader 
+       */
       public function getHeader() {
           return $this->_header;
       }

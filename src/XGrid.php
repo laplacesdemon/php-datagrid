@@ -39,7 +39,7 @@
       
       /**
        * The html structure helper
-       * @var XGrid_HtmlHelper_Interface
+       * @var XGrid_HtmlHelper_CollectionInterface
        */
       private $_htmlHelper = null;
       
@@ -49,7 +49,6 @@
           $this->_htmlHelper = (is_null($this->_htmlHelper)) ?
                   new XGrid_HtmlHelper_Default() : $htmlHelper;
           
-          $this->init();
       }
 
       public function init() {
@@ -106,7 +105,7 @@
           if (is_null($this->getDataSource()))
               throw new XGrid_Exception("No data source found. Please set one");
 
-          
+          $this->init();
           $this->preDispatch();
           
           $this->_htmlHelper->setData($this->getDataSource());
@@ -177,13 +176,24 @@
       }
 
       public function setHtmlHelper(XGrid_HtmlHelper_Interface $helper) {
-          $this->_htmlHelper = $helper;
+          $this->_htmlHelper = $helper; 
+      }
+      
+      /**
+       * The html helper
+       * this is a renderable htmlhelper item and has table parts 
+       * (header, body, footer) in it
+       * @return XGrid_HtmlHelper_CollectionInterface 
+       */
+      public function getHtmlHelper() {
+          return $this->_htmlHelper;
       }
 
       /**
        *
        * @return boolean
        * @todo implemented
+       * @deprecated
        */
       public function hasPagination() {
           // return true if pagination plugin registered
