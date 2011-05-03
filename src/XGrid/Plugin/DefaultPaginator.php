@@ -134,7 +134,7 @@
           
           $structure = $this->_paginator->getStructure();
           
-          $this->_xhtml = "<div class='paginationControl'>";
+          $this->_xhtml = "<tr><td><div class='paginationControl'>";
           
           // previous page 
           if($structure->getPrevious()) {
@@ -156,10 +156,10 @@
           if($structure->getNext()) {
               $this->_xhtml .= "<a href='" . $this->getBaseUrl(array($this->_pageUrlIdentifier => $structure->getNext())) . "'>&lt; Next</a>";
           } else {
-              $this->_xhtml .= "<span class='disabled'>&gt; Next</span>";
+              $this->_xhtml .= "<span class='disabled'>Next &gt;</span>";
           }
           
-          $this->_xhtml .= "</div>";
+          $this->_xhtml .= "</div></td></tr>";
           
       }
 

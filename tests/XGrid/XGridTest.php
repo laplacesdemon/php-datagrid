@@ -93,11 +93,9 @@
           $expected .= "<tr><td>Value 21</td><td>Value 22</td></tr>";
           $expected .= "</tbody>";
           $expected .= "<tfoot>";
-          $expected .= "<div class='paginationControl'>" .
-                       "<a href='http://localhost/test?p=2'>&lt; Previous</a> | " . 
-                       "<a href='http://localhost/test?p=1'>1</a> | " . 
-                       "<a href='http://localhost/test?p=2'>2</a> | 3 | " . 
-                       "<span class='disabled'>&gt; Next</span></div>";
+          $expected .= "<tr><td><div class='paginationControl'><a href='http://localhost/test?p=2'>&lt; Previous</a> | " .
+                        "<a href='http://localhost/test?p=1'>1</a> | <a href='http://localhost/test?p=2'>2</a> | " .
+                        "3 | <span class='disabled'>Next &gt;</span></div></td></tr>";
           $expected .= "</tfoot></table>";
           
           $grid = new XGrid();
@@ -171,7 +169,6 @@
           );
           $dataSource = new XGrid_DataSource_Array($data);
           $grid->setDataSource($dataSource);
-          
           $grid->addAttribute('class', 'myTableClass');
           
           $grid->dispatch();
