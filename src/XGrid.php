@@ -190,6 +190,19 @@
       }
 
       /**
+       * Adds attribute to the specified item
+       * @todo only works for table element, implemented for other elements
+       * 
+       * @param string $key
+       * @param string $value 
+       */
+      public function addAttribute($key, $value, $element = 'table') {
+          // in order to add attributes to specific elements, we need to 
+          // traverse though the html items
+          $this->getHtmlHelper()->addAttribute($key, $value);
+      }
+      
+      /**
        *
        * @return boolean
        * @todo implemented
