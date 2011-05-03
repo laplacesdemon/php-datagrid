@@ -86,6 +86,8 @@
       public function getBaseUrl($data = null) {
           if($data) {
               if(strpos($this->_baseUrl, "?")) {
+                  // @todo we're deleting the older query string parameters
+                  // this is certanly a bug
                   return $this->_baseUrl . http_build_query($data);
               } else {
                   return $this->_baseUrl . "?" . http_build_query($data);
@@ -154,7 +156,7 @@
           
           // next page 
           if($structure->getNext()) {
-              $this->_xhtml .= "<a href='" . $this->getBaseUrl(array($this->_pageUrlIdentifier => $structure->getNext())) . "'>&lt; Next</a>";
+              $this->_xhtml .= "<a href='" . $this->getBaseUrl(array($this->_pageUrlIdentifier => $structure->getNext())) . "'>Next &gt;</a>";
           } else {
               $this->_xhtml .= "<span class='disabled'>Next &gt;</span>";
           }
