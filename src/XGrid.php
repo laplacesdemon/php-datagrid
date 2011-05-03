@@ -48,7 +48,7 @@
       public function __construct($htmlHelper = null) {
           $this->_htmlHelper = (is_null($this->_htmlHelper)) ?
                   new XGrid_HtmlHelper_Default() : $htmlHelper;
-          
+          $this->init();
       }
 
       public function init() {
@@ -105,7 +105,7 @@
           if (is_null($this->getDataSource()))
               throw new XGrid_Exception("No data source found. Please set one");
 
-          $this->init();
+          
           $this->preDispatch();
           
           $this->_htmlHelper->setData($this->getDataSource());
