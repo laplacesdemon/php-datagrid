@@ -149,7 +149,31 @@
           return $value;
       }
 
-      abstract public function getValue($object);
+      public function render() {
+          return $this->getTitle();
+      }
+      
+      protected function _getFilteredValue($object, $key = null) {
+          if(!$object) {
+              return;
+          }
+          
+          if($key instanceof XGrid_DataField_LinkedList) {
+              
+              if(is_null($key->getNext())) 
+                  return $this->filter($object->{$key->getKey()});
+              else 
+                  return $this->_getFilteredValue($object->{$key->getKey()}, $key->getNext());
+
+          } else {
+              throw new XGrid_Exception("The key need to be a " .
+                  "XGrid_DataField_LinkedList instance", 500);
+          }
+      }
+
+      public function getValue($object) {
+          return $this->_getFilteredValue($object, $this->getKey());
+      }
   }
 
   class XGrid_DataField_LinkedList {

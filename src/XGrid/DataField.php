@@ -31,7 +31,7 @@
               case self::TEXT:
                   $cls = new XGrid_DataField_Text();
                   break;
-              case self::TEXT:
+              case self::DATE:
                   $cls = new XGrid_DataField_Date();
                   break;
           }
