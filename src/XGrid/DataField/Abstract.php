@@ -6,25 +6,22 @@
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
   abstract class XGrid_DataField_Abstract implements XGrid_Filter_Interface, XGrid_HtmlHelper_Renderable {
-   
+
       /**
        * The data title, used on the table header
        * @var String
        */
       protected $_title;
-      
       /**
        * The data key, used as tjhe unique identifier of a column
        * @var string
        */
-      protected $_key;
-      
+      protected $_key = null;
       /**
        * Collection of options as key value pairs
        * @var array
        */
       protected $_options = array();
-      
       /**
        * Collection of XGrid_Filter_Interface objects
        * @var array
@@ -37,18 +34,42 @@
        * @return XGrid_DataField_Abstract 
        */
       public function setKey($key) {
-          $this->_key = $key;
+          $tmp = new XGrid_DataField_LinkedList();
+          $tmp->setKey($key);
+          if (!$this->_key) {
+              $this->_key = $tmp;
+          } else {
+              $this->_key->setKey($tmp);
+          }
+
           return $this;
       }
-      
+
       /**
        * The getter of datafield key, used for the identifier of the data column
-       * @return type 
+       * @return XGrid_DataField_LinkedList 
        */
       public function getKey() {
           return $this->_key;
       }
-      
+
+      /**
+       * The recursive datafield key. It is used for fetching the value from 
+       * the nested object. Use this if you have nested stdClass 
+       * @param mixed $key 
+       */
+      public function addKey($key) {
+          $tmp = new XGrid_DataField_LinkedList();
+          $tmp->setKey($key);
+          if($this->_key instanceof XGrid_DataField_LinkedList) {
+              $this->_key->setNext($tmp);
+          } else {
+              $this->_key = $tmp;
+          }
+          
+          return $this;
+      }
+
       /**
        * the title of the data column
        * @return string
@@ -64,7 +85,7 @@
       public function setTitle($_title) {
           $this->_title = $_title;
       }
-      
+
       /**
        * Array of options. Options are simple key value pairs
        * @param array $options 
@@ -74,7 +95,7 @@
           $this->_options = $options;
           return $this;
       }
-      
+
       /**
        * Add a single option
        * @param string $key
@@ -85,7 +106,7 @@
           $this->_options[$key] = $value;
           return $this;
       }
-      
+
       /**
        * Array of options. Options are simple key value pairs
        * @return array
@@ -93,16 +114,16 @@
       public function getOptions() {
           return $this->_options;
       }
-      
+
       /**
        * Collection of XGrid_Filter_Interface objects
        * @param array $filters 
        */
       public function setFilters($filters) {
-         $this->_filters = $filters;
-         return $this;
+          $this->_filters = $filters;
+          return $this;
       }
-      
+
       /**
        * Adds a sinle filter object
        * @param XGrid_Filter_Interface $filter
@@ -112,7 +133,7 @@
           array_push($this->_filters, $filter);
           return $this;
       }
-      
+
       public function getFilters() {
           return $this->_filters;
       }
@@ -127,5 +148,49 @@
           }
           return $value;
       }
-      
+
+      abstract public function getValue($object);
+  }
+
+  class XGrid_DataField_LinkedList {
+
+      private $_next = null;
+      private $_key = null;
+
+      /**
+       *
+       * @return XGrid_DataField_LinkedList 
+       */
+      public function getNext() {
+          return $this->_next;
+      }
+
+     /**
+      *
+      * @param XGrid_DataField_LinkedList $obj 
+      */
+      public function setNext(XGrid_DataField_LinkedList $obj) {
+          $this->_next = $obj;
+      }
+
+      /**
+       *
+       * @return string 
+       */
+      public function getKey() {
+          return $this->_key;
+      }
+
+      /**
+       *
+       * @param string $_key 
+       */
+      public function setKey($_key) {
+          $this->_key = $_key;
+      }
+
+      public function __toString() {
+          return $this->getKey();
+      }
+  
   }

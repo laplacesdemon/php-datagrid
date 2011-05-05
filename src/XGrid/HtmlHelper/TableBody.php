@@ -38,10 +38,11 @@
           foreach ($this->_data->getIterator() as $d) {
               $row = new XGrid_HtmlHelper_Item("tr");
               foreach ($this->_dataFields as $field) {
-                  if (!isset($d->{$field->getKey()}))
+                  $val = $field->getValue($d);
+                  if (empty($val))
                       continue;
                   $c = new XGrid_HtmlHelper_Item("td");
-                  $c->append($d->{$field->getKey()});
+                  $c->append($val);
                   $row->append($c);
               }
               $this->append($row);

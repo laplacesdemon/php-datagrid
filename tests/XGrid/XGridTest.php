@@ -34,7 +34,7 @@
           $expected->setTitle("My Key");
           
           $grid = new XGrid();
-          $grid->addDataField("myKeyIndex", "My Key", new XGrid_DataField_Text("My Key") );
+          $grid->addDataField("myKeyIndex", "My Key", new XGrid_DataField_Text() );
           
           $this->assertEquals($expected, $grid->getDataField("myKeyIndex")); 
       }

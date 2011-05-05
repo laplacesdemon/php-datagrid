@@ -18,6 +18,10 @@
        * @return XGrid_Plugin_Pagination_Abstract 
        */
       public static function create(XGrid_DataSource_Interface $datasource) {
+          if($datasource instanceof XGrid_Plugin_Pagination_Abstract) {
+              return $datasource;
+          }
+          
           $ins = null;
           switch ($datasource) {
               case $datasource instanceof XGrid_DataSource_Array:

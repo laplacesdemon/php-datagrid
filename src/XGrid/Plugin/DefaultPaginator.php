@@ -104,7 +104,8 @@
       }
 
       public function preDispatch() {
-          $this->_paginator = XGrid_Plugin_Pagination_Factory::create($this->getXgrid()->getDataSource());
+          if(!$this->_paginator)
+            $this->_paginator = XGrid_Plugin_Pagination_Factory::create($this->getXgrid()->getDataSource());
           $this->_paginator->setCurrentPage($this->getCurrentPage());
           $this->_paginator->setItemCountPerPage($this->getItemCountPerPage());
           $this->_paginator->setRange($this->getRange());

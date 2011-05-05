@@ -17,15 +17,32 @@
           $class = new XGrid_DataField_Text();
           $class->setKey("My Data Key");
           
-          $this->assertEquals("My Data Key", $class->getKey());
+          $expected = new XGrid_DataField_LinkedList();
+          $expected->setKey("My Data Key");
+          $this->assertEquals($expected, $class->getKey());
       }
       
       public function testConstructor() {
           // data field class represents the value of a field in a row.
           $class = new XGrid_DataField_Text("My Data Key");
-          $this->assertEquals("My Data Key", $class->getKey());
+          
+          $expected = new XGrid_DataField_LinkedList();
+          $expected->setKey("My Data Key");
+          $this->assertEquals($expected, $class->getKey());
       }
       
+      public function testShouldReturnCorrectValue() {
+          // Fetching the email value from the User class
+          $data = new stdClass();
+          $data->User = "suleyman";
+          
+          $instance = new XGrid_DataField_Text();
+          $instance->addKey("User");
+          
+          $this->assertEquals("suleyman", $instance->getValue($data));
+      }
+
+
       public function testShouldHaveFilters() {
           $filter = new XGrid_Filter_Uppercase();
           
@@ -38,6 +55,23 @@
           $this->assertEquals("MY VAL", $res);
           
       }
+      
+      public function testShouldHaveRecursiveKeys() {
+          // Fetching the email value from the User class
+          $data = new stdClass();
+          $data->User = new stdClass();
+          $data->User->email = "suleyman@melikoglu.info";
+          
+          $instance = new XGrid_DataField_Text();
+          $instance->addKey("User");
+          $instance->addKey("email");
+          
+          
+          
+          $this->assertEquals("suleyman@melikoglu.info", $instance->getValue($data));
+          
+      }
+      
       
       
       
