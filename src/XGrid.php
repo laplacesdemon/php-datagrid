@@ -168,7 +168,10 @@
        */
       public function addDataField($index, $title, $dataField, $options = null, $filters = null) {
           if ($dataField instanceof XGrid_DataField_Abstract) {
-              $dataField->setKey($index);
+              
+              if(!$dataField->getKey())
+                $dataField->setKey($index);
+              
               $dataField->setTitle($title);
               $this->_dataFields[$index] = $dataField;
               return $this;
