@@ -161,7 +161,8 @@
           if($key instanceof XGrid_DataField_LinkedList) {
               
               if(is_null($key->getNext())) 
-                  return $this->filter($object->{$key->getKey()});
+                  return (isset($object->{$key->getKey()})) ? 
+                        $this->filter($object->{$key->getKey()}) : '';
               else 
                   return $this->_getFilteredValue($object->{$key->getKey()}, $key->getNext());
 
