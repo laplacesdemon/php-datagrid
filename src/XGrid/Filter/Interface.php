@@ -13,6 +13,6 @@
       /**
        * filters the value and returns filtered value
        */
-      public function filter($value);
+      public function filter($value, $row = null);
       
   }

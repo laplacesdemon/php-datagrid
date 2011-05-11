@@ -40,7 +40,7 @@
               foreach ($this->_dataFields as $field) {
                   $val = $field->getValue($d);
                   if (empty($val))
-                      continue;
+                      $val = '';
                   $c = new XGrid_HtmlHelper_Item("td");
                   $c->append($val);
                   $row->append($c);

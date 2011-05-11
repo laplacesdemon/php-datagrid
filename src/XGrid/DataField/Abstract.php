@@ -142,9 +142,9 @@
        * implements the XGrid_Filter_Interface
        * @param string $value 
        */
-      public function filter($value) {
+      public function filter($value, $row = null) {
           foreach ($this->getFilters() as $filter) {
-              $value = $filter->filter($value);
+              $value = $filter->filter($value, $row);
           }
           return $value;
       }
@@ -162,7 +162,7 @@
               
               if(is_null($key->getNext())) 
                   return (isset($object->{$key->getKey()})) ? 
-                        $this->filter($object->{$key->getKey()}) : '';
+                        $this->filter($object->{$key->getKey()}, $object) : '';
               else 
                   return $this->_getFilteredValue($object->{$key->getKey()}, $key->getNext());
 
