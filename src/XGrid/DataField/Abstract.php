@@ -27,6 +27,8 @@
        * @var array
        */
       protected $_filters = array();
+      
+      protected $_defaultText = '';
 
       /**
        * The setter of datafield key, used for the identifier of the data column
@@ -86,6 +88,15 @@
           $this->_title = $_title;
       }
 
+      public function getDefaultText() {
+          return $this->_defaultText;
+      }
+
+      public function setDefaultText($_defaultText) {
+          $this->_defaultText = $_defaultText;
+          return $this;
+      }
+      
       /**
        * Array of options. Options are simple key value pairs
        * @param array $options 
@@ -162,11 +173,11 @@
               
               if(is_null($key->getNext())) 
                   return (isset($object->{$key->getKey()})) ? 
-                        $this->filter($object->{$key->getKey()}, $object) : '';
+                        $this->filter($object->{$key->getKey()}, $object) : $this->getDefaultText();
               else 
                   return (isset($object->{$key->getKey()})) ? 
                     $this->_getFilteredValue($object->{$key->getKey()}, $key->getNext())
-                            : '';
+                            : $this->getDefaultText();
 
           } else {
               throw new XGrid_Exception("The key need to be a " .

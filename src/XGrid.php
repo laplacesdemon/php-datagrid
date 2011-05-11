@@ -175,9 +175,7 @@
               $dataField->setTitle($title);
               $this->_dataFields[$index] = $dataField;
               return $this;
-          }
-
-          if (is_string($dataField)) {
+          } elseif (is_string($dataField)) {
               $this->_dataFields[$index] =
                       XGrid_DataField::create($dataField, $index, $title, $options, $filters);
           }
@@ -242,6 +240,7 @@
           // in order to add attributes to specific elements, we need to 
           // traverse though the html items
           $this->getHtmlHelper()->addAttribute($key, $value);
+          return $this;
       }
       
       /**

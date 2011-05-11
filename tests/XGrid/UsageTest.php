@@ -33,7 +33,7 @@
    */
   class UsageTest extends BaseTestCase {
    
-      public function testUsageWithSuccessfulScenerio() {
+      public function usageWithSuccessfulScenerio() {
           
           // the factory creates the grid instance, 
           // The instance may be created via a 3rd party class (like a Zend 
@@ -122,6 +122,82 @@
           
           // echo the table
           echo $grid;
+      }
+      
+      public function usageOfInitialVersion() {
+          $currentPage = $this->getRequest()->getParam('p', 1);
+        
+          // get the data
+          $data = $this->getHelper('RestFactory')
+                  ->create('support', null, array('p' => $currentPage))
+                  ->includeLockedItems(true)
+                  ->setLockingEnabled(false)
+                  ->get();
+          
+          $grid = new XGrid(
+                  array(
+                      'pagination' => array(
+                         'currentPage' => $currentPage,
+                         'perPage' => $data->getMeta()->pagination->perPage,
+                         'baseUrl' => $this->view->url()
+                      )
+                  )
+          );
+          $grid->addAttribute('class', 'xgrid');
+          
+          $grid->addField("id", "Id", XGrid_DataField::TEXT);
+          $grid->addField("ip_address", "Ip Address", XGrid_DataField::TEXT);
+          
+          $df = new XGrid_DataField_Text();
+          $df->addKey("sender");
+          $df->addKey("name");
+          $df->addFilter(
+                  new XGrid_Filter_ZendLink($this->view, 
+                      array(
+                          'controller' => 'support', 
+                          'lang' => $this->lang,
+                          'action' => 'detail',
+                          'id' => '{%id}'
+                      ), array('class' => 'myClass')
+                  ));
+          
+          $grid->addField("name", "Name", $df);
+          
+          $df = new XGrid_DataField_Text();
+          $df->addKey("sender");
+          $df->addKey("email");
+          $grid->addField("email", "Email", $df);
+          
+          $grid->addField("created_at", "Created at", XGrid_DataField::DATE);
+          
+          $df = new XGrid_DataField_Text();
+          $df->addKey("resource");
+          $df->addKey("name");
+          $df->addFilter(new XGrid_Filter_FirstWord());
+          $df->addFilter(new XGrid_Filter_Concatenator('', ' ' . $this->translate->_(' is reading')));
+          $grid->addField("status", "Status", $df);
+          $grid->addField("assignee", "Assignee", XGrid_DataField::TEXT);
+          
+          $df = new XGrid_DataField_Buttons();
+          $df->addKey('id')
+            ->setButton(new XGrid_Filter_ZendLink($this->view, 
+                      array(
+                          'controller' => 'support', 
+                          'lang' => $this->lang,
+                          'action' => 'detail',
+                          'id' => '{%id}'
+                      ), array('class' => 'details'), 'Details'
+                  ))
+            ->setZendLink($this->view, 'Delete', 'delete', 'id', array('class' => 'delete'))
+            ->setSeperator(' | ');
+          
+          $grid->addField('buttons', 'Actions', $df);
+                    
+          $grid->setDataSource(new OS_Rest_XGrid_Adapter($data));
+          
+          //$grid->setCrudStrategy($this);
+          
+          $this->view->grid = $grid->dispatch();
       }
       
   }

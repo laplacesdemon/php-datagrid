@@ -14,12 +14,14 @@
       private $_view;
       private $_arr;
       private $_attributes;
+      private $_linkText;
 
 
-      public function __construct(Zend_View $view, $arr, $attributes = array()) {
+      public function __construct(Zend_View $view, $arr, $attributes = array(), $linkText = null) {
           $this->_view = $view;
           $this->_arr = $arr;
           $this->_attributes = $attributes;
+          $this->_linkText = $linkText;
       }
       
       public function filter($value, $row = null) {
@@ -33,6 +35,7 @@
               $atts .= $key . '="' . $val . '"';
           }
           
+          $value = ($this->_linkText) ? $this->_linkText : $value;
           return '<a ' . $atts . ' href="' . $this->_view->url($arr) . '" >' . $value . '</a>';
       }
   }
