@@ -164,7 +164,9 @@
                   return (isset($object->{$key->getKey()})) ? 
                         $this->filter($object->{$key->getKey()}, $object) : '';
               else 
-                  return $this->_getFilteredValue($object->{$key->getKey()}, $key->getNext());
+                  return (isset($object->{$key->getKey()})) ? 
+                    $this->_getFilteredValue($object->{$key->getKey()}, $key->getNext())
+                            : '';
 
           } else {
               throw new XGrid_Exception("The key need to be a " .
