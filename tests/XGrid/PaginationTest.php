@@ -20,8 +20,8 @@
           $expected .= "<tfoot></tfoot></table>";
           
           $grid = new XGrid();
-          $grid->addDataField("name", "Name", XGrid_DataField::TEXT);
-          $grid->addDataField("surname", "SurName", XGrid_DataField::TEXT);
+          $grid->addField("name", "Name", XGrid_DataField::TEXT);
+          $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("id" => "my id 1", "name" => "Value 11", "surname" => "Value 12"),
               array("id" => "my id 2", "total" => "nr", "name" => "Value 21", "surname" => "Value 22")

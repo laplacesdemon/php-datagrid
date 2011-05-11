@@ -63,17 +63,17 @@
           // the datasource need to be array
           // string parameter can be used if the datasource is stdClass 
           // or an associative array
-          $grid->addDataField(1, "Username", XGrid_DataField::TEXT);
-          $grid->addDataField(2, "Name Surname", XGrid_DataField::TEXT);
+          $grid->addField(1, "Username", XGrid_DataField::TEXT);
+          $grid->addField(2, "Name Surname", XGrid_DataField::TEXT);
           // associated string identifier
-          $grid->addDataField("email", "E-mail", XGrid_DataField::TEXT);
-          $grid->addDataField("theDate", "Created at", XGrid_DataField::DATE, array('format' => 'dd.MM.yyyy'));
-          $grid->addDataField("updatedAt", "Updated at", new XGrid_DataField('dd.MM.yyyy'));
+          $grid->addField("email", "E-mail", XGrid_DataField::TEXT);
+          $grid->addField("theDate", "Created at", XGrid_DataField::DATE, array('format' => 'dd.MM.yyyy'));
+          $grid->addField("updatedAt", "Updated at", new XGrid_DataField('dd.MM.yyyy'));
           // you can even add a filter to it
-          $grid->addDataField('username', "My uppercase field", XGrid_DataField::TEXT, null, new XGrid_Filter_Uppercase() );
+          $grid->addField('username', "My uppercase field", XGrid_DataField::TEXT, null, new XGrid_Filter_Uppercase() );
           $dataField = new XGrid_DataField_Text();
           $dataField->addFilter($dataField);
-          $grid->setDataField('username', "My alternative uppercase field", $dataField);
+          $grid->addField('username', "My alternative uppercase field", $dataField);
           
           // pagination params: recordrs per page, range, pagination strategy
           $grid->setPagination(10, 6, XGrid_Pagination::ELASTIC);

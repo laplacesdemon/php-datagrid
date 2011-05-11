@@ -14,8 +14,8 @@
       
       private function _getXGrid() {
           $grid = new XGrid();
-          $grid->addDataField("name", "Name", XGrid_DataField::TEXT);
-          $grid->addDataField("surname", "SurName", XGrid_DataField::TEXT);
+          $grid->addField("name", "Name", XGrid_DataField::TEXT);
+          $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("name" => "Value 01", "surname" => "Value 00"),
               array("name" => "Value 02", "surname" => "Value 00"),

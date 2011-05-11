@@ -17,13 +17,13 @@
           $this->assertTrue($grid instanceof XGrid_Plugin_Interface);
       }
       
-      public function testAddDataField() {
+      public function testAddField() {
           $expected = new XGrid_DataField_Text();
           $expected->setTitle("My Key");
           $expected->setKey("myKeyIndex");
           
           $grid = new XGrid();
-          $grid->addDataField("myKeyIndex", "My Key", XGrid_DataField::TEXT);
+          $grid->addField("myKeyIndex", "My Key", XGrid_DataField::TEXT);
           
           $this->assertEquals($expected, $grid->getDataField("myKeyIndex")); 
       }
@@ -34,7 +34,7 @@
           $expected->setTitle("My Key");
           
           $grid = new XGrid();
-          $grid->addDataField("myKeyIndex", "My Key", new XGrid_DataField_Text() );
+          $grid->addField("myKeyIndex", "My Key", new XGrid_DataField_Text() );
           
           $this->assertEquals($expected, $grid->getDataField("myKeyIndex")); 
       }
@@ -48,8 +48,8 @@
           $expected .= "<tfoot></tfoot></table>";
           
           $grid = new XGrid();
-          $grid->addDataField("name", "Name", XGrid_DataField::TEXT);
-          $grid->addDataField("surname", "SurName", XGrid_DataField::TEXT);
+          $grid->addField("name", "Name", XGrid_DataField::TEXT);
+          $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("name" => "Value 11", "surname" => "Value 12"),
               array("name" => "Value 21", "surname" => "Value 22")
@@ -73,8 +73,8 @@
           $expected .= "<tfoot></tfoot></table>";
           
           $grid = new XGrid();
-          $grid->addDataField(1, "Name", XGrid_DataField::TEXT);
-          $grid->addDataField(2, "SurName", XGrid_DataField::TEXT);
+          $grid->addField(1, "Name", XGrid_DataField::TEXT);
+          $grid->addField(2, "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("Value 11", "Value 12"),
               array("Value 21", "Value 22")
@@ -99,8 +99,8 @@
           $expected .= "</tfoot></table>";
           
           $grid = new XGrid();
-          $grid->addDataField("name", "Name", XGrid_DataField::TEXT);
-          $grid->addDataField("surname", "SurName", XGrid_DataField::TEXT);
+          $grid->addField("name", "Name", XGrid_DataField::TEXT);
+          $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("name" => "Value 01", "surname" => "Value 00"),
               array("name" => "Value 02", "surname" => "Value 00"),
@@ -149,8 +149,8 @@
                   'baseUrl' => 'http://localhost/test'
               )
           ));
-          $grid->addDataField("name", "Name", XGrid_DataField::TEXT);
-          $grid->addDataField("surname", "SurName", XGrid_DataField::TEXT);
+          $grid->addField("name", "Name", XGrid_DataField::TEXT);
+          $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("name" => "Value 01", "surname" => "Value 00"),
               array("name" => "Value 02", "surname" => "Value 00"),
@@ -176,8 +176,8 @@
           $expected .= "<tfoot></tfoot></table>";
           
           $grid = new XGrid();
-          $grid->addDataField("name", "Name", XGrid_DataField::TEXT);
-          $grid->addDataField("surname", "SurName", XGrid_DataField::TEXT);
+          $grid->addField("name", "Name", XGrid_DataField::TEXT);
+          $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("id" => "my id 1", "name" => "Value 11", "surname" => "Value 12"),
               array("id" => "my id 2", "total" => "nr", "name" => "Value 21", "surname" => "Value 22")
@@ -198,8 +198,8 @@
           $expected .= "<tfoot></tfoot></table>";
           
           $grid = new XGrid();
-          $grid->addDataField("name", "Name", XGrid_DataField::TEXT);
-          $grid->addDataField("surname", "SurName", XGrid_DataField::TEXT);
+          $grid->addField("name", "Name", XGrid_DataField::TEXT);
+          $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
           $data = array(
               array("name" => "Value 11", "surname" => "Value 12"),
               array("name" => "Value 21", "surname" => "Value 22")
