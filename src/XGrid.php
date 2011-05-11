@@ -166,7 +166,7 @@
        * @param type $filters
        * @return XGrid 
        */
-      public function addDataField($index, $title, $dataField, $options = null, $filters = null) {
+      public function addField($index, $title, $dataField, $options = null, $filters = null) {
           if ($dataField instanceof XGrid_DataField_Abstract) {
               
               if(!$dataField->getKey())
