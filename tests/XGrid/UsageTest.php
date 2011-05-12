@@ -33,6 +33,10 @@
    */
   class UsageTest extends BaseTestCase {
    
+      /**
+       * This usge test is created BEFORE the actual implementation and might have
+       * codes that is not implemented yet. So do not rely on it.
+       */
       public function usageWithSuccessfulScenerio() {
           
           // the factory creates the grid instance, 
@@ -124,80 +128,81 @@
           echo $grid;
       }
       
-      public function usageOfInitialVersion() {
-          $currentPage = $this->getRequest()->getParam('p', 1);
-        
-          // get the data
-          $data = $this->getHelper('RestFactory')
-                  ->create('support', null, array('p' => $currentPage))
-                  ->includeLockedItems(true)
-                  ->setLockingEnabled(false)
-                  ->get();
-          
+      /**
+       * This usage example indicates the usage
+       */
+      public function testUsageOfInitialVersion() {
+          $currentPage = 1;
+                  
           $grid = new XGrid(
                   array(
                       'pagination' => array(
                          'currentPage' => $currentPage,
-                         'perPage' => $data->getMeta()->pagination->perPage,
-                         'baseUrl' => $this->view->url()
+                         'perPage' => 3,
+                         'baseUrl' => '/xgridAction' // $view->url()
                       )
                   )
           );
-          $grid->addAttribute('class', 'xgrid');
           
-          $grid->addField("id", "Id", XGrid_DataField::TEXT);
-          $grid->addField("ip_address", "Ip Address", XGrid_DataField::TEXT);
+          // you can create other types of datasources as well
+          $array = array(
+              array('id' => 3, 'name' => 'Suleyman Melkoglu', 'email' => 'suleyman@melikoglu.info', 'created_at' => time(), 'status' => '1'),
+              array('id' => 4, 'name' => 'Onur Yaman', 'email' => 'onuryaman@gmail.cim', 'created_at' => time(), 'status' => null),
+              array('id' => 5, 'name' => 'Can Arbaz', 'email' => 'canarbaz@gmail.com', 'created_at' => time(), 'status' => '1'),
+              array('id' => 6, 'name' => 'Niels Clause', 'email' => 'nielzclause@gmail.com', 'created_at' => time(), 'status' => null),
+          );
+          $grid->setDataSource(new XGrid_DataSource_Array($array));
           
-          $df = new XGrid_DataField_Text();
-          $df->addKey("sender");
-          $df->addKey("name");
-          $df->addFilter(
-                  new XGrid_Filter_Zend_Link($this->view, 
+          // custom data fields
+          $nameDataField = new XGrid_DataField_Text();
+          $nameDataField->addKey("name")
+                        /*->addFilter(
+                                  new XGrid_Filter_Zend_Link($this->view, 
+                                      array(
+                                          'controller' => 'user', 
+                                          'lang' => $this->lang,
+                                          'action' => 'detail',
+                                          'id' => '{%id}'
+                                      ), array('class' => 'myClass')
+                                  ))*/
+                  ;
+          
+          $statusDataField = new XGrid_DataField_Text();
+          $statusDataField->addKey("name")
+                          ->setDefaultText("Waiting for reply")
+                          ->addFilter(new XGrid_Filter_FirstWord()) // 
+                          ->addFilter(new XGrid_Filter_Concatenator('Mr. ', ' is the king')); // we are appending the is reading status 
+          
+          $buttons = new XGrid_DataField_Buttons();
+          $buttons->addKey('id')
+            /*->setButton(
+                    new XGrid_Filter_Zend_Link($this->view, 
                       array(
                           'controller' => 'support', 
                           'lang' => $this->lang,
-                          'action' => 'detail',
+                          'action' => 'edit',
                           'id' => '{%id}'
-                      ), array('class' => 'myClass')
-                  ));
-          
-          $grid->addField("name", "Name", $df);
-          
-          $df = new XGrid_DataField_Text();
-          $df->addKey("sender");
-          $df->addKey("email");
-          $grid->addField("email", "Email", $df);
-          
-          $grid->addField("created_at", "Created at", XGrid_DataField::DATE);
-          
-          $df = new XGrid_DataField_Text();
-          $df->addKey("resource");
-          $df->addKey("name");
-          $df->addFilter(new XGrid_Filter_FirstWord());
-          $df->addFilter(new XGrid_Filter_Concatenator('', ' ' . $this->translate->_(' is reading')));
-          $grid->addField("status", "Status", $df);
-          $grid->addField("assignee", "Assignee", XGrid_DataField::TEXT);
-          
-          $df = new XGrid_DataField_Buttons();
-          $df->addKey('id')
-            ->setButton(new XGrid_Filter_Zend_Link($this->view, 
-                      array(
-                          'controller' => 'support', 
-                          'lang' => $this->lang,
-                          'action' => 'detail',
-                          'id' => '{%id}'
-                      ), array('class' => 'details'), 'Details'
-                  ))
-            ->setZendLink($this->view, 'Delete', 'delete', 'id', array('class' => 'delete'))
+                      ), array('class' => 'details'), $this->translate->_("Details")
+                  ))*/
+            // alternatively you can add the link with the following method.
+            //->setZendLink($this->view, 'Details', 'details', 'id', array('class' => 'details'))
             ->setSeperator(' | ');
           
-          $grid->addField('buttons', 'Actions', $df);
-                    
-          $grid->setDataSource(new OS_Rest_XGrid_Adapter($data));
+          $grid->addAttribute('class', 'xgrid fullwidth')
+               ->addAttribute('id', 'table-support')
+               ->addField("id", "Selection" /* you can use it with a translator $this->translate->_("Selection") */ , XGrid_DataField::CHECKBOX)
+               ->addField("name", "Name", $nameDataField)
+               ->addField("email", "Email", XGrid_DataField::TEXT)
+               //->addField("created_at", "Created at", XGrid_DataField::DATE)
+               ->addField("status", "Status", $statusDataField)
+               ->addField('buttons', 'Actions', $buttons);
+          
           
           //$grid->setCrudStrategy($this);
           
-          $this->view->grid = $grid->dispatch();
+          $grid = $grid->dispatch();
+          
+          //var_dump($grid->__toString());
       }
       
   }

@@ -30,15 +30,13 @@
       }
       
       public function testPaginationUsage() {
-          $expected = "<table><thead><tr><th>Name</th><th>SurName</th></tr></thead>";
-          $expected .= "<tbody>";
-          $expected .= "<tr><td>Value 11</td><td>Value 12</td></tr>";
-          $expected .= "<tr><td>Value 21</td><td>Value 22</td></tr>";
-          $expected .= "</tbody>";
-          $expected .= "<tfoot>previous &lt; " . 
-                        "<a href='http://localhost/xgrid?p=1'>1</a> |" . 
-                        "<a href='http://localhost/xgrid?p=2'>2</a> |" . 
-                        "3 &gt; next</tfoot></table>";
+         
+          $expected = "<table><thead><tr><th>Name</th><th>SurName</th></tr></thead>" .
+              "<tbody>" .
+                    "<tr><td>Value 11</td><td>Value 12</td></tr>" .
+                    "<tr><td>Value 21</td><td>Value 22</td></tr>" . 
+              "</tbody><tfoot>" .
+                  "<tr><td colspan='2' ><div class='paginationControl'><a href='?p=2'>&lt; Previous</a> | <a href='?p=1'>1</a> | <a href='?p=2'>2</a> | 3 | <span class='disabled'>Next &gt;</span></div></td></tr></tfoot></table>";
           
           $xgrid = $this->_getXGrid();
           
