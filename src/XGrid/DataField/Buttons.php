@@ -24,7 +24,7 @@
       }
       
       public function setZendLink(Zend_View $view, $title, $action = 'edit', $dataField = 'id', $attributes = array()) {
-          $filter = new XGrid_Filter_ZendLink($view, 
+          $filter = new XGrid_Filter_Zend_Link($view, 
                       array(
                           'action' => $action,
                           'id' => "{%$dataField}"

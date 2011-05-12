@@ -9,7 +9,7 @@
    *
    * @author suleymanmelikoglu [at] oyunstudyosu.com
    */
-  class XGrid_Filter_ZendLink extends XGrid_Filter_Abstract {
+  class XGrid_Filter_Zend_Link extends XGrid_Filter_Abstract {
       
       private $_view;
       private $_arr;

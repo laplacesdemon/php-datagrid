@@ -11,10 +11,11 @@
    */
   class XGrid_DataField {
 
-      const TEXT        = "text";
-      const DATE        = "date";
+      const TEXT        = "XGrid_DataField_Text";
+      const DATE        = "XGrid_DataField_Date";
       const DROPDOWN    = "dropdown";
       const ANCHOR      = "anchor";
+      const CHECKBOX    = "XGrid_DataField_Checkbox";
       
       /**
        * Factory method to create datafield instances
@@ -27,17 +28,12 @@
       public static function create($type, $key, $title, $options = null, $filters = null) {
           $cls = null;
           
-          switch ($type) {
-              case self::TEXT:
-                  $cls = new XGrid_DataField_Text();
-                  break;
-              case self::DATE:
-                  $cls = new XGrid_DataField_Date();
-                  break;
-          }
-          
-          if(is_null($cls))
+          try {
+              $cls = new $type;
+          } catch (Exception $e) {
+              //@todo is there any 'class not found' exception?
               throw new XGrid_Exception("Unknown data field type: " . $type);
+          }
               
           $cls->setKey($key);
           $cls->setTitle($title);

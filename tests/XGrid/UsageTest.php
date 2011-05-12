@@ -152,7 +152,7 @@
           $df->addKey("sender");
           $df->addKey("name");
           $df->addFilter(
-                  new XGrid_Filter_ZendLink($this->view, 
+                  new XGrid_Filter_Zend_Link($this->view, 
                       array(
                           'controller' => 'support', 
                           'lang' => $this->lang,
@@ -180,7 +180,7 @@
           
           $df = new XGrid_DataField_Buttons();
           $df->addKey('id')
-            ->setButton(new XGrid_Filter_ZendLink($this->view, 
+            ->setButton(new XGrid_Filter_Zend_Link($this->view, 
                       array(
                           'controller' => 'support', 
                           'lang' => $this->lang,

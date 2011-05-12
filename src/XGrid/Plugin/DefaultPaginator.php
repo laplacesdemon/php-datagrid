@@ -137,7 +137,9 @@
           
           $structure = $this->_paginator->getStructure();
           
-          $this->_xhtml = "<tr><td><div class='paginationControl'>";
+          $columnCount = sizeof($this->getXgrid()->getDataFields());
+          
+          $this->_xhtml = "<tr><td colspan='" . $columnCount . "' ><div class='paginationControl'>";
           
           // previous page 
           if($structure->getPrevious()) {
