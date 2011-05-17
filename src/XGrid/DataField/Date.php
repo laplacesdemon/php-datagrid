@@ -23,9 +23,12 @@
       
       public function getValue($object) {
           $value = parent::getValue($object);
-          
-          $date = new Zend_Date($value);
-          return $date->get($this->_format);
+          try {
+              $date = new Zend_Date($value);
+              return $date->get($this->_format);
+          } catch (Exception $e) {
+              return '';
+          }
       }
   
   }

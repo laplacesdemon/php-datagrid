@@ -28,7 +28,12 @@
        */
       protected $_filters = array();
       
+      protected $_disableFilters = false;
+      
       protected $_defaultText = '';
+
+      private $_observers = array();
+
 
       /**
        * The setter of datafield key, used for the identifier of the data column
@@ -159,6 +164,20 @@
           }
           return $value;
       }
+      
+      public function disableFilters() {
+          return $this->_disableFilters;
+      }
+
+      /**
+       * temporarily disables the filter for the render
+       * @param type $_disableFilters
+       * @return XGrid_DataField_Abstract 
+       */
+      public function setDisableFilters($_disableFilters) {
+          $this->_disableFilters = $_disableFilters;
+          return $this;
+      }
 
       public function render() {
           return $this->getTitle();
@@ -173,7 +192,7 @@
               
               if(is_null($key->getNext())) 
                   return (isset($object->{$key->getKey()})) ? 
-                        $this->filter($object->{$key->getKey()}, $object) : $this->getDefaultText();
+                    $this->filter($object->{$key->getKey()}, $object) : $this->getDefaultText();
               else 
                   return (isset($object->{$key->getKey()})) ? 
                     $this->_getFilteredValue($object->{$key->getKey()}, $key->getNext())
@@ -186,8 +205,26 @@
       }
 
       public function getValue($object) {
-          return $this->_getFilteredValue($object, $this->getKey());
+          if(sizeof($this->_observers) > 0) {
+              $event = new XGrid_DataField_Event();
+              $event->setData($object);
+              $event->setDataField($this);
+              foreach ($this->_observers as $name => $func) {
+                  $event->setName($name);
+                  $object = $func($event);
+              }
+              $return = ($this->disableFilters()) ? $object : $this->filter($object);
+              $this->setDisableFilters(false);
+              return $return;
+          } else {
+              return $this->_getFilteredValue($object, $this->getKey());
+          }
       }
+      
+      public function registerOnRender($func) {
+          $this->_observers['onRow'] = $func;
+      }
+      
   }
 
   class XGrid_DataField_LinkedList {
@@ -232,3 +269,49 @@
       }
   
   }
+  
+  class XGrid_DataField_Event {
+      
+      /**
+       * the event name
+       * @var string
+       */
+      private $_name;
+      
+      /**
+       * raw data
+       * @var stdClass
+       */
+      private $_data;
+      
+      /**
+       * the actual datafield object
+       * @var XGrid_DataField_Abstract
+       */
+      private $_dataField;
+      
+      public function getName() {
+          return $this->_name;
+      }
+
+      public function setName($_name) {
+          $this->_name = $_name;
+      }
+
+      public function getData() {
+          return $this->_data;
+      }
+
+      public function setData($_data) {
+          $this->_data = $_data;
+      }
+
+      public function getDataField() {
+          return $this->_dataField;
+      }
+
+      public function setDataField($_dataField) {
+          $this->_dataField = $_dataField;
+      }
+
+    }
