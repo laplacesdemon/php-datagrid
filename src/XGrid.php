@@ -1,13 +1,18 @@
 <?php
 
   /**
-   * Fully functional data grid
+   * A Flexible and extensible data grid
    * 
    * Phase 1:
+   *    Creating the HTML structure
+   *    Dispatching
+   *    Plug-ins
+   *    DataSources
+   *    Filters
+   *    Pagination Plugin
    * 
    * Phase 2:
-   *    crusStrategy
-   *    Pagination
+   *    CrudStrategy
    *    Searchable plugin
    *    Sortable plugin
    * 
@@ -17,22 +22,26 @@
   class XGrid implements XGrid_Plugin_Interface {
 
       /**
-       * collection of XGrid_Plugin_Interface objects
+       * Collection of XGrid_Plugin_Interface objects
        * @var array
        */
       protected $_plugins = array();
+      
       /**
        * Collection of XGrid_DataField_Abstract objects
        * @var array
        */
       protected $_dataFields;
+      
       /**
-       * the data adapter
+       * The data adapter reference
        * @var XGrid_DataSource_Interface
        */
       protected $_dataSource;
+      
       /**
-       * the crud strategy for inserting updating and deleting the data
+       * The crud strategy for inserting updating and deleting the data
+       * @todo 
        * @var XGrid_CrudStrategy_Interface
        */
       protected $_crudStrategy;
@@ -43,52 +52,66 @@
        */
       private $_htmlHelper = null;
       
+      /**
+       * Notifies that the aookication is dispatched or not
+       * @var type 
+       */
       private $_isDispatched = false;
 
       /**
-       * instantiates the grid
-       * optional array of options can set predefined options
-       * see documentation for details
+       * The constructor
+       * Optional array of options to set the predefined options
        * @param array $options 
        */
       public function __construct($options = null) {
-          if($options) {
-              foreach ($options as $key => $value) {
-                  switch ($key) {
-                      case 'htmlhelper':
-                          if($value instanceof XGrid_HtmlHelper_Interface)
-                            $this->_htmlHelper = $value;
-                          else
-                              throw new XGrid_Exception (
-                                      'HtmlHelper should be an instance of XGrid_HtmlHelper_Interface');
-                          // @todo create a factory class for htmlhelpers to instantiate from the class name
-                          break;
-                      case 'pagination':
-                          // @todo create a factory class
-                          // pagination option uses the default paginator object
-                          $type = XGrid_Plugin_Pagination::SLIDING;
-                          $paginator = new XGrid_Plugin_DefaultPaginator();
-                          if(!isset ($value['currentPage']))
-                              throw new XGrid_Exception ("current page for the paginator should set", 500);
-                          $perPage = (isset($value['perPage'])) ? $value['perPage'] : 20;
-                          $range = (isset($value['range'])) ? $value['range'] : 6;
-                          $baseUrl = (isset($value['baseUrl'])) ? $value['baseUrl'] : "";
-                          
-                          $paginator->setCurrentPage($value['currentPage']);
-                          $paginator->setItemCountPerPage($perPage);
-                          $paginator->setRange($range);
-                          $paginator->setType($type);
-                          $paginator->setBaseUrl($baseUrl);
-                          $this->registerPlugin($paginator);
-                          break;
-                  }
-              }
+          $this->_initOptions($options);
+          $this->init();
+      }
+      
+      /**
+       * Setting optional parameters for easy instantiation
+       * @param type $options 
+       */
+      private function _initOptions($options = null) {
+          // default parameters
+          $params = array(
+              'htmlHelper' => new XGrid_HtmlHelper_Default()
+          );
+          
+          // override default parameters with the options
+          if($options)
+            $params = array_merge($params, $options);
+          
+          // set html helper
+          if ($params['htmlHelper'] instanceof XGrid_HtmlHelper_Interface)
+              $this->_htmlHelper = $params['htmlHelper'];
+          else
+              throw new XGrid_Exception(
+                      'HtmlHelper should be an instance of XGrid_HtmlHelper_Interface');
+          
+          // set optional pagination plug in
+          if(isset($params['pagination'])) {
+              $paginator = (isset($params['pagination']['paginator']) && 
+                                $params['pagination']['paginator'] instanceof XGrid_Plugin_Abstract) ? 
+                    $params['pagination']['paginator'] :
+                    new XGrid_Plugin_DefaultPaginator();
+              
+              $currentPage = (isset($params['pagination']['currentPage'])) ?
+                        $params['pagination']['currentPage'] : 1;
+
+              $perPage = (isset($params['pagination']['perPage'])) ? $params['pagination']['perPage'] : 20;
+              $range = (isset($params['pagination']['range'])) ? $params['pagination']['range'] : 6;
+              $baseUrl = (isset($params['pagination']['baseUrl'])) ? $params['pagination']['baseUrl'] : "";
+              $type = (isset($params['pagination']['baseUrl'])) ? $params['pagination']['baseUrl'] : XGrid_Plugin_Pagination::SLIDING;
+              
+              $paginator->setCurrentPage($currentPage);
+              $paginator->setItemCountPerPage($perPage);
+              $paginator->setRange($range);
+              $paginator->setType($type);
+              $paginator->setBaseUrl($baseUrl);
+              $this->registerPlugin($paginator);
           }
           
-          if(is_null($this->_htmlHelper))
-            $this->_htmlHelper = new XGrid_HtmlHelper_Default();
-          
-          $this->init();
       }
 
       public function init() {
@@ -145,12 +168,12 @@
           if (is_null($this->getDataSource()))
               throw new XGrid_Exception("No data source found. Please set one");
 
-          
+
           $this->preDispatch();
           $this->_htmlHelper->setData($this->getDataSource());
           $this->_htmlHelper->setColumns($this->getDataFields());
           $this->_htmlHelper->init();
-          
+
           $this->postDispatch();
 
           $this->_isDispatched = true;
@@ -168,10 +191,10 @@
        */
       public function addField($index, $title, $dataField, $options = null, $filters = null) {
           if ($dataField instanceof XGrid_DataField_Abstract) {
-              
-              if(!$dataField->getKey())
-                $dataField->setKey($index);
-              
+
+              if (!$dataField->getKey())
+                  $dataField->setKey($index);
+
               $dataField->setTitle($title);
               $this->_dataFields[$index] = $dataField;
               return $this;
@@ -216,9 +239,9 @@
       }
 
       public function setHtmlHelper(XGrid_HtmlHelper_Interface $helper) {
-          $this->_htmlHelper = $helper; 
+          $this->_htmlHelper = $helper;
       }
-      
+
       /**
        * The html helper
        * this is a renderable htmlhelper item and has table parts 
@@ -242,7 +265,7 @@
           $this->getHtmlHelper()->addAttribute($key, $value);
           return $this;
       }
-      
+
       /**
        *
        * @return boolean
