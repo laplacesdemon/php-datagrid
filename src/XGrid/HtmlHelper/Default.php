@@ -7,7 +7,7 @@
   /**
    * Description of Default
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_HtmlHelper_Default extends XGrid_HtmlHelper_Item implements XGrid_HtmlHelper_CollectionInterface {
 

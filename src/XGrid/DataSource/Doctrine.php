@@ -7,7 +7,7 @@
   /**
    * Description of Doctrine
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_DataSource_Doctrine implements XGrid_DataSource_Interface {
 

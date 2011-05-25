@@ -7,7 +7,7 @@
   /**
    * Description of GridTest
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    * @group grid
    */
   class XGridTest extends BaseTestCase {

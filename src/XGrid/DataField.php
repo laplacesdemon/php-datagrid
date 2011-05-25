@@ -7,7 +7,7 @@
   /**
    * Description of DataField
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_DataField {
 

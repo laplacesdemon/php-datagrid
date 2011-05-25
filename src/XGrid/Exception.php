@@ -7,7 +7,7 @@
   /**
    * Description of Exception
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Exception extends Exception {
       

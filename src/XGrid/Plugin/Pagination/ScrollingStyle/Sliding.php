@@ -7,7 +7,7 @@
   /**
    * Description of Sliding
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Plugin_Pagination_ScrollingStyle_Sliding implements XGrid_Plugin_Pagination_ScrollingStyle_Interface {
 

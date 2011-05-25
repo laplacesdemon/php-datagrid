@@ -7,7 +7,7 @@
   /**
    * Description of EventsTest
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    * @group tmp
    */
   class XGrid_DataField_EventsTest extends BaseTestCase {

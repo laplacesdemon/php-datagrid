@@ -6,7 +6,7 @@
 
   /**
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   interface XGrid_HtmlHelper_Interface extends XGrid_HtmlHelper_Renderable {
 

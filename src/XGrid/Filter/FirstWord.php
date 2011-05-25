@@ -7,7 +7,7 @@
   /**
    * Description of FirstWord
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Filter_FirstWord extends XGrid_Filter_Abstract {
       

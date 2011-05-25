@@ -7,7 +7,7 @@
   /**
    * @todo write the tests for pagination
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class PaginationTest extends BaseTestCase {
       

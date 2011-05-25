@@ -7,7 +7,7 @@
   /**
    * DataSource adapter interface provides the data for displaying into the grid
    * 
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   interface XGrid_DataSource_Interface extends Countable, IteratorAggregate {
       

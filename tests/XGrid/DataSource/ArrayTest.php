@@ -7,7 +7,7 @@
   /**
    * Description of ArrayTest
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    * @group grid
    */
   class XGrid_DataSource_ArrayTest extends BaseTestCase {

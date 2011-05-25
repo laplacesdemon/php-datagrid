@@ -29,7 +29,7 @@
   /**
    * Description of UsageTest
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class UsageTest extends BaseTestCase {
    

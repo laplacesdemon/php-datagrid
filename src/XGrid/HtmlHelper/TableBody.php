@@ -7,7 +7,7 @@
   /**
    * Description of TableBody
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_HtmlHelper_TableBody extends XGrid_HtmlHelper_Item {
 

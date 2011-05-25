@@ -6,7 +6,7 @@
 /**
  * Description of SanityCheckTest
  *
- * @author suleymanmelikoglu [at] oyunstudyosu.com
+ * @author suleyman [at] melikoglu.info
  */
 class SanityCheckTest extends BaseTestCase {
 

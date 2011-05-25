@@ -7,7 +7,7 @@
   /**
    * Description of Uppercase
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Filter_Uppercase extends XGrid_Filter_Abstract {
       

@@ -3,7 +3,7 @@
   /**
    * Description of Abstract
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   abstract class XGrid_DataField_Abstract implements XGrid_Filter_Interface, XGrid_HtmlHelper_Renderable {
 

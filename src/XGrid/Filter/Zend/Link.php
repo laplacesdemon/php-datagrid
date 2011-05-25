@@ -7,7 +7,7 @@
   /**
    * Description of e
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Filter_Zend_Link extends XGrid_Filter_Abstract {
       

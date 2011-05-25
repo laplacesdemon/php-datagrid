@@ -7,7 +7,7 @@
   /**
    * Description of Buttons
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_DataField_Buttons extends XGrid_DataField_Abstract {
    

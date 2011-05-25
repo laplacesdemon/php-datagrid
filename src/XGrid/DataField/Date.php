@@ -7,7 +7,7 @@
   /**
    * Description of Date
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Datafield_Date extends XGrid_DataField_Abstract {
    

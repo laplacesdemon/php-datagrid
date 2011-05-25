@@ -7,7 +7,7 @@
   /**
    * Description of Array
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_DataSource_Array implements XGrid_DataSource_Interface {
 

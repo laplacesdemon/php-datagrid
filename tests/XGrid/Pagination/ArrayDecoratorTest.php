@@ -7,7 +7,7 @@
   /**
    * Description of ArrayDecoratorTest
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    * @group grid
    */
   class ArrayDecoratorTest extends BaseTestCase {

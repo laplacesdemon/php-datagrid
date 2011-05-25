@@ -7,7 +7,7 @@
   /**
    * Storage for the constants for pagination
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Plugin_Pagination {
    

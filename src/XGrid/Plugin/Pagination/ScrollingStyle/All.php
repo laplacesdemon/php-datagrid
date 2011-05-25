@@ -7,7 +7,7 @@
   /**
    * Description of All
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Plugin_Pagination_ScrollingStyle_All implements XGrid_Plugin_Pagination_ScrollingStyle_Interface {
       

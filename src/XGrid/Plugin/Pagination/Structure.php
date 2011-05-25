@@ -7,7 +7,7 @@
   /**
    * Description of ScrollingStyle
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Plugin_Pagination_Structure {
       

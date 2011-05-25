@@ -7,7 +7,7 @@
   /**
    * Description of Doctrine
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Plugin_Pagination_Doctrine extends XGrid_Plugin_Pagination_Abstract {
 

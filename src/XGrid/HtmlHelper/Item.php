@@ -7,7 +7,7 @@
   /**
    * Description of Item
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_HtmlHelper_Item implements XGrid_HtmlHelper_Interface {
 

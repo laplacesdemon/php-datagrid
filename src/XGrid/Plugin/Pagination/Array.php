@@ -10,7 +10,7 @@
    * It basically manipulates the internal array using the current page and count
    * of items per page
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Plugin_Pagination_Array extends XGrid_Plugin_Pagination_Abstract {
 

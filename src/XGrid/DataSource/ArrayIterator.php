@@ -7,7 +7,7 @@
   /**
    * Description of ArrayIterator
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_DataSource_ArrayIterator extends ArrayIterator {
    

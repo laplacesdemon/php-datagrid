@@ -7,7 +7,7 @@
   /**
    * Description of Pagination
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_Plugin_DefaultPaginator extends XGrid_Plugin_Abstract {
 

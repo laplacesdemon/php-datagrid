@@ -7,7 +7,7 @@
   /**
    * Description of Text
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid_DataField_Text extends XGrid_DataField_Abstract {
          

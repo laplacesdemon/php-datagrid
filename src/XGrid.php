@@ -12,7 +12,7 @@
    *    Sortable plugin
    * 
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   class XGrid implements XGrid_Plugin_Interface {
 

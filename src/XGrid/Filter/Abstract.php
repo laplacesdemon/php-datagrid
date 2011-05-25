@@ -7,7 +7,7 @@
   /**
    * Description of Abstract
    *
-   * @author suleymanmelikoglu [at] oyunstudyosu.com
+   * @author suleyman [at] melikoglu.info
    */
   abstract class XGrid_Filter_Abstract implements XGrid_Filter_Interface {
       
