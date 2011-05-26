@@ -62,7 +62,7 @@
                               }
                           });
                           
-          $customDateField = new XGrid_Datafield_Date();
+          $customDateField = new XGrid_DataField_DefaultDate();
           $customDateField->addKey("created_at");
           $customDateField->setFormat('d.m.Y'); 
           

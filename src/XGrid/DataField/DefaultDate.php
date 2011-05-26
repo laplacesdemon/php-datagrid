@@ -5,7 +5,7 @@
    * @see http://php.net/manual/en/function.date.php
    * @author suleyman [at] melikoglu.info
    */
-  class XGrid_DataField_Date extends XGrid_DataField_Abstract {
+  class XGrid_DataField_DefaultDate extends XGrid_DataField_Abstract {
    
       private $_format = "d.m.Y i:s";
       
@@ -28,6 +28,5 @@
           } else {
               return '';
           }
-      }
-      
+      } 
   }

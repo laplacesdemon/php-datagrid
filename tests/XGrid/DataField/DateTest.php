@@ -10,13 +10,13 @@
    * @author suleyman [at] melikoglu.info
    * @group tmp
    */
-  class XGrid_DataField_DateTest extends BaseTestCase {
+  class DateTest extends BaseTestCase {
    
       public function testBasicUsage() {
           $data = new stdClass();
           $data->timestamp = strtotime("25 April 2011");
           
-          $instance = new XGrid_Datafield_Date();
+          $instance = new XGrid_DataField_DefaultDate();
           $instance->addKey("timestamp");
           $instance->setFormat('d.m.Y'); // if does not set, falls back to default format
           
@@ -27,7 +27,7 @@
           $data = new stdClass();
           $data->theDate = strtotime("illegal date");
           
-          $instance = new XGrid_Datafield_Date();
+          $instance = new XGrid_DataField_DefaultDate();
           $instance->addKey("theDate");
           $instance->setFormat('d.m.Y'); // if does not set, falls back to default format
           
