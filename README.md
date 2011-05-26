@@ -7,9 +7,6 @@ The development is in phase1 stage. Contributions are welcome.
 
 Please see the tests/XGrid/UsageTest.php file to find out how it works.
 
-Features
-========
-
 Features of phase1:
 -------------------
 
