@@ -1,11 +1,11 @@
 <?php
 
   /*
-   * 
+   * git@github.com:laplacesdemon/XGrid.git
    */
 
   /**
-   * Description of Abstract
+   * The base class for the plugins
    *
    * @author suleyman [at] melikoglu.info
    */

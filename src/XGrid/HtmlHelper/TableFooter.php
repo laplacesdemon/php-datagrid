@@ -1,11 +1,11 @@
 <?php
 
   /*
-   * 
+   * git@github.com:laplacesdemon/XGrid.git
    */
 
   /**
-   * Description of TableHeader
+   * The footer part of the table
    *
    * @author suleyman [at] melikoglu.info
    */

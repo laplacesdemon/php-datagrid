@@ -1,11 +1,11 @@
 <?php
 
   /*
-   * 
+   * git@github.com:laplacesdemon/XGrid.git
    */
 
   /**
-   * Description of ArrayIterator
+   * internal iterator for array datasource
    *
    * @author suleyman [at] melikoglu.info
    */

@@ -5,7 +5,8 @@
    */
 
   /**
-   * Description of Exception
+   * The default exception class. Does nothing at the moment. Additional logging
+   * features might be added in the future.
    *
    * @author suleyman [at] melikoglu.info
    */

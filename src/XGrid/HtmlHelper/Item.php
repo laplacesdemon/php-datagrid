@@ -1,11 +1,11 @@
 <?php
 
   /*
-   * 
+   * git@github.com:laplacesdemon/XGrid.git
    */
 
   /**
-   * Description of Item
+   * The html item is the atomic renderable unit of the html structure
    *
    * @author suleyman [at] melikoglu.info
    */

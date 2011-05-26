@@ -3,9 +3,9 @@
   /*
    * git@github.com:laplacesdemon/XGrid.git
    */
-
+  
   /**
-   * Description of Array
+   * The array datasource. Allows to use an associated array as the data source
    *
    * @author suleyman [at] melikoglu.info
    */
@@ -33,6 +33,13 @@
           return new XGrid_DataSource_ArrayIterator($this->_data);
       }
 
+      /**
+       * Returns the raw data object to decorated by an external class (i.e. plugins)
+       * For example the paginator decorator gets the decoratable object and change
+       * it to support pagination
+       * 
+       * @return array
+       */
       public function getDecoratableObject() {
           return $this->_data;
       }

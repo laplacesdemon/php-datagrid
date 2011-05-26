@@ -5,7 +5,7 @@
    */
 
   /**
-   * Description of Default
+   * The html helper is used for creating the html structure
    *
    * @author suleyman [at] melikoglu.info
    */

@@ -1,7 +1,7 @@
 <?php
 
   /**
-   * Description of Abstract
+   * Abstract class for the data fields. 
    *
    * @author suleyman [at] melikoglu.info
    */

@@ -1,12 +1,8 @@
 <?php
-
-  /*
-   * 
-   */
-
   /**
-   * Description of Date
-   *
+   * The checkbox data field. It allows to put a checkbox html element to the 
+   * record
+   * 
    * @author suleyman [at] melikoglu.info
    */
   class XGrid_Datafield_Checkbox extends XGrid_DataField_Abstract {

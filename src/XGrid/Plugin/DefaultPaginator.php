@@ -1,11 +1,12 @@
 <?php
 
   /*
-   * 
+   * git@github.com:laplacesdemon/XGrid.git
    */
 
   /**
-   * Description of Pagination
+   * The default paginator. The paginator limits the data set and injects 
+   * paginator html structure to the footer. 
    *
    * @author suleyman [at] melikoglu.info
    */

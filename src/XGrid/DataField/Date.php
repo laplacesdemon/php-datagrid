@@ -1,17 +1,13 @@
 <?php
-
-  /*
-   * 
-   */
-
   /**
-   * Description of Date
-   *
+   * The date date data field implementation. It accepts the PHP date formats.
+   * 
+   * @see http://php.net/manual/en/function.date.php
    * @author suleyman [at] melikoglu.info
    */
-  class XGrid_Datafield_Date extends XGrid_DataField_Abstract {
+  class XGrid_DataField_Date extends XGrid_DataField_Abstract {
    
-      private $_format = "dd/MM/yyyy hh:mm";
+      private $_format = "d.m.Y i:s";
       
       public function __construct($key = null) {
           if(!is_null($key)) $this->setKey ($key);
@@ -21,14 +17,17 @@
           $this->_format = $_format;
       }
       
+      private function _isTimestamp( $string ) {
+          return ( 1 === preg_match( '~^[1-9][0-9]*$~', $string ) );
+      }
+      
       public function getValue($object) {
           $value = parent::getValue($object);
-          try {
-              $date = new Zend_Date($value);
-              return $date->get($this->_format);
-          } catch (Exception $e) {
+          if($this->_isTimestamp($value)) {
+              return date($this->_format, $value);
+          } else {
               return '';
           }
       }
-  
+      
   }

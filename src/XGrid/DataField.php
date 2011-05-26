@@ -5,7 +5,7 @@
    */
 
   /**
-   * Description of DataField
+   * The data filed factory that encapsulates the creation of data field instances.
    *
    * @author suleyman [at] melikoglu.info
    */

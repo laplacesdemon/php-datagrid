@@ -1,11 +1,8 @@
 <?php
-
-  /*
-   * git@github.com:laplacesdemon/XGrid.git
-   */
-
   /**
-   * Description of Text
+   * The most simple data field. Just puts the raw data to the record. 
+   * This data field is also the default field if no fields are explicitly
+   * added to the xgrid
    *
    * @author suleyman [at] melikoglu.info
    */

@@ -1,11 +1,10 @@
 <?php
-
   /*
-   * 
+   * git@github.com:laplacesdemon/XGrid.git
    */
 
   /**
-   * Description of Abstract
+   * The abstract class adds additional logic to filter data
    *
    * @author suleyman [at] melikoglu.info
    */

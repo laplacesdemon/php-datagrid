@@ -1,11 +1,11 @@
 <?php
 
   /*
-   * 
+   * git@github.com:laplacesdemon/XGrid.git
    */
 
   /**
-   * Description of Appender
+   * The concatenator used for appending and prepending data to the data field
    *
    * @author suleyman [at] melikoglu.info
    */
@@ -13,9 +13,12 @@
      
       private $_textToPrepend = "";
       private $_textToAppend = "";
-      
 
-
+      /**
+       * Appends and/or prepends additional data to the field
+       * @param string $textToPrepend
+       * @param string $textToAppend 
+       */
       public function __construct($textToPrepend = "", $textToAppend = "") {
           $this->_textToPrepend = $textToPrepend;
           $this->_textToAppend = $textToAppend;

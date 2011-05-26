@@ -1,11 +1,11 @@
 <?php
 
   /*
-   * 
+   * git@github.com:laplacesdemon/XGrid.git
    */
 
   /**
-   * Description of Doctrine
+   * Data source for the Doctrine ORM framework
    *
    * @author suleyman [at] melikoglu.info
    */

@@ -60,7 +60,7 @@
 
       /**
        * The constructor
-       * Optional array of options to set the predefined options
+       * Optional array of options make it easy to configure xgrid
        * @param array $options 
        */
       public function __construct($options = null) {
@@ -114,18 +114,27 @@
           
       }
 
+      /**
+       * The hook method for plugins
+       */
       public function init() {
           foreach ($this->_plugins as $plugin) {
               $plugin->init();
           }
       }
 
+      /**
+       * The hook method for plugins
+       */
       public function postDispatch() {
           foreach ($this->_plugins as $plugin) {
               $plugin->postDispatch();
           }
       }
 
+      /**
+       * The hook method for plugins
+       */
       public function preDispatch() {
           foreach ($this->_plugins as $plugin) {
               $plugin->preDispatch();
@@ -168,12 +177,18 @@
           if (is_null($this->getDataSource()))
               throw new XGrid_Exception("No data source found. Please set one");
 
-
+          // check if at least one data field is added. otherwise add datafields 
+          // from the data source automatically
+          if(empty ($this->_dataFields)) {
+              $current = $this->_dataSource->getIterator()->current();
+              foreach ($current as $key => $val)
+                  $this->addField($key, $key, XGrid_DataField::TEXT);
+          }
+          
           $this->preDispatch();
           $this->_htmlHelper->setData($this->getDataSource());
           $this->_htmlHelper->setColumns($this->getDataFields());
           $this->_htmlHelper->init();
-
           $this->postDispatch();
 
           $this->_isDispatched = true;
@@ -181,12 +196,15 @@
       }
 
       /**
-       *
-       * @param type $index
-       * @param type $key
-       * @param type $dataField
-       * @param type $options
-       * @param type $filters
+       * Adds a data field. A data field represents the columns in the grid. <br />
+       * Each data filed should be set explicitly in order to display in the data grid
+       * 
+       * @todo if no data field is set, add all supported fields in the datasource automatically.
+       * @param string $index | the unique identifier of the column
+       * @param string $key | the title column to be displayed in the table header
+       * @param mixed $dataField | string or XGrid_DataField_Abstract instance
+       * @param array $options | additional key value pairs
+       * @param array $filters | collection of XGrid_Filter_Interface objects
        * @return XGrid 
        */
       public function addField($index, $title, $dataField, $options = null, $filters = null) {
@@ -207,8 +225,9 @@
       }
 
       /**
-       * returns the datafield object 
+       * Returns the datafield object 
        * null if not found
+       * 
        * @param int or string $index
        * @return XGrid_DataField_Abstract or null
        */
@@ -217,12 +236,17 @@
                   null;
       }
 
+      /**
+       * Retuns the collection of XGrid_DataField_Abstract objects
+       * @return array
+       */
       public function getDataFields() {
           return $this->_dataFields;
       }
 
       /**
        * The data source provides the dataset for the grid body
+       * 
        * @param XGrid_DataSource_Abstract $datasource 
        */
       public function setDataSource(XGrid_DataSource_Interface $datasource) {
@@ -231,13 +255,15 @@
       }
 
       /**
-       *
        * @return XGrid_DataSource_Interface 
        */
       public function getDataSource() {
           return $this->_dataSource;
       }
 
+      /**
+       * @param XGrid_HtmlHelper_Interface $helper 
+       */
       public function setHtmlHelper(XGrid_HtmlHelper_Interface $helper) {
           $this->_htmlHelper = $helper;
       }
@@ -267,18 +293,8 @@
       }
 
       /**
-       *
-       * @return boolean
-       * @todo implemented
-       * @deprecated
-       */
-      public function hasPagination() {
-          // return true if pagination plugin registered
-          return false;
-      }
-
-      /**
        * The magic function to return grid xhtml
+       * 
        * @return String
        */
       public function __toString() {

@@ -5,7 +5,7 @@
    */
 
   /**
-   * Description of TableHeader
+   * The header part of the table
    *
    * @author suleyman [at] melikoglu.info
    */
