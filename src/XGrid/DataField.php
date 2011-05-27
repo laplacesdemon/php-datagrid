@@ -12,7 +12,7 @@
   class XGrid_DataField {
 
       const TEXT        = "XGrid_DataField_Text";
-      const DATE        = "XGrid_DataField_Date";
+      const DATE        = "XGrid_DataField_DefaultDate";
       const DROPDOWN    = "dropdown";
       const ANCHOR      = "anchor";
       const CHECKBOX    = "XGrid_DataField_Checkbox";
