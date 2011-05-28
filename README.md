@@ -48,4 +48,4 @@ $grid->dispatch();
 
 echo $grid;
 
-)
+);
