@@ -32,7 +32,7 @@ Sorting Plugin
 
 Usage:
 ------
-(
+array(
 
 $grid = new XGrid();
 $data = array(
