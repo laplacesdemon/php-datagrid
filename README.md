@@ -32,6 +32,7 @@ Sorting Plugin
 
 Usage:
 ------
+
 array(
 
 $grid = new XGrid();
@@ -39,13 +40,9 @@ $data = array(
               array("name" => "Value 11", "surname" => "Value 12"),
               array("name" => "Value 21", "surname" => "Value 22")
 );
-
 $dataSource = new XGrid_DataSource_Array($data);
-
 $grid->setDataSource($dataSource);
-
 $grid->dispatch();
-
 echo $grid;
 
 );
