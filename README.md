@@ -33,7 +33,15 @@ Sorting Plugin
 Usage:
 ------
 
+Make sure that the 'src' folder is in your include path. XGrid uses the __autoload magic function for the file inclusion. Please use the following example to include files.
+
 <pre>
+function __autoload($class_name) {
+    $tokens = explode("_", $class_name);
+    $fileName = implode("/", $tokens);
+    include_once  $fileName . '.php';
+}
+
 $grid = new XGrid();
 $data = array(
               array("name" => "Value 11", "surname" => "Value 12"),
