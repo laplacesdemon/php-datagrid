@@ -60,5 +60,4 @@ echo $grid;
 Conventions and Coding Standard:
 --------------------------------
 
-XGrid uses the coding standard as described in the following url:
-'http://framework.zend.com/manual/en/coding-standard.html'
+XGrid uses the coding standard as described in the following url: http://framework.zend.com/manual/en/coding-standard.html
