@@ -29,6 +29,10 @@ Search Plugin
 
 Sorting Plugin
 
+Autoloading:
+------------
+
+XGrid uses PHP's autoloading feature to load/include files. Please refer to the 'Conventions and Coding Standard' section for the naming conventions.
 
 Usage:
 ------
@@ -52,3 +56,9 @@ $grid->setDataSource($dataSource);
 $grid->dispatch();
 echo $grid;
 </pre>
+
+Conventions and Coding Standard:
+--------------------------------
+
+XGrid uses the coding standard as described in the following url:
+'http://framework.zend.com/manual/en/coding-standard.html'
