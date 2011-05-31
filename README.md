@@ -91,3 +91,12 @@ Conventions and Coding Standard:
 --------------------------------
 
 XGrid uses the coding standard as described in the following url: http://framework.zend.com/manual/en/coding-standard.html
+
+TroubleShooting:
+----------------
+
+If you encounter some class including problems please add the following line
+
+<pre>
+spl_autoload_register('__autoload');
+</pre>
