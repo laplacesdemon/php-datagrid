@@ -37,14 +37,11 @@ XGrid uses PHP's autoloading feature to load/include files. Please refer to the 
 Usage:
 ------
 
-Make sure that the 'src' folder is in your include path. XGrid uses the __autoload magic function for the file inclusion. Please use the following example to include files.
+Make sure that the 'src' folder is in your include path. XGrid uses the __autoload magic function for the file inclusion. Please use the following example to include files. If you use a framework like ZendFramework or CakePHP, the autoloading will be handled by them for you.
 
 <pre>
-function __autoload($class_name) {
-    $tokens = explode("_", $class_name);
-    $fileName = implode("/", $tokens);
-    include_once  $fileName . '.php';
-}
+require 'XGrid/Config.php';
+spl_autoload_register(array('XGrid_Config', 'xgridAutoload'));
 </pre>
 
 A standard way of using XGrid is following
@@ -91,12 +88,3 @@ Conventions and Coding Standard:
 --------------------------------
 
 XGrid uses the coding standard as described in the following url: http://framework.zend.com/manual/en/coding-standard.html
-
-TroubleShooting:
-----------------
-
-If you encounter some class including problems please add the following line
-
-<pre>
-spl_autoload_register('__autoload');
-</pre>
