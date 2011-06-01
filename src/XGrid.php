@@ -177,12 +177,8 @@
           if (is_null($this->getDataSource()))
               throw new XGrid_Exception("No data source found. Please set one");
 
-          // check if at least one data field is added. otherwise add datafields 
-          // from the data source automatically
           if(empty ($this->_dataFields)) {
-              $current = $this->_dataSource->getIterator()->current();
-              foreach ($current as $key => $val)
-                  $this->addField($key, $key, XGrid_DataField::TEXT);
+              $this->_autoLoadDataFields();
           }
           
           $this->preDispatch();
@@ -193,6 +189,16 @@
 
           $this->_isDispatched = true;
           return $this;
+      }
+      
+      /**
+       * check if at least one data field is added. otherwise add datafields 
+       * from the data source automatically
+       */
+      private function _autoLoadDataFields() {
+          $current = $this->_dataSource->getIterator()->current();
+          foreach ($current as $key => $val)
+              $this->addField($key, $key, XGrid_DataField::TEXT);
       }
 
       /**
