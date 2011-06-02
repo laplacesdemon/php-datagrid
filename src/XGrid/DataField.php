@@ -16,6 +16,7 @@
       const DROPDOWN    = "dropdown";
       const ANCHOR      = "anchor";
       const CHECKBOX    = "XGrid_DataField_Checkbox";
+      const DATETIME	= "XGrid_DataField_DateTime";
       
       /**
        * Factory method to create datafield instances

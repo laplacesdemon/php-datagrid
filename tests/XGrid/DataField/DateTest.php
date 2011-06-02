@@ -31,7 +31,7 @@
           $instance->addKey("theDate");
           $instance->setFormat('d.m.Y'); // if does not set, falls back to default format
           
-          $this->assertEquals("", $instance->getValue($data));
+          $this->assertEquals("01.01.1970", $instance->getValue($data));
       }
       
   }
