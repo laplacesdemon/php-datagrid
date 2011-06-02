@@ -42,7 +42,8 @@
       }
 
       public function getIterator() {
-          return $this->_query->execute();
+          $collection = $this->_query->execute();
+          return $collection->getIterator();;
       }
 
   }
