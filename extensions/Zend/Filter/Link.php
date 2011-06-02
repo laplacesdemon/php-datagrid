@@ -1,15 +1,9 @@
 <?php
-
-  /*
-   * 
-   */
-
   /**
    * Description of e
    *
-   * @author suleyman [at] melikoglu.info
    */
-  class OS_XGrid_Zend_Filter_Link extends XGrid_Filter_Abstract {
+  class XGrid_Zend_Filter_Link extends XGrid_Filter_Abstract {
       
       private $_view;
       private $_arr;

@@ -1,15 +1,9 @@
 <?php
-
-  /*
-   * 
-   */
-
   /**
    * Description of Buttons
    *
-   * @author suleyman [at] melikoglu.info
    */
-  class OS_XGrid_Zend_DataField_Buttons extends XGrid_DataField_Abstract {
+  class XGrid_Zend_DataField_Buttons extends XGrid_DataField_Abstract {
    
       private $_internalFilters = array();
       private $_seperator = ' ';

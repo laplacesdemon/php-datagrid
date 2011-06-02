@@ -1,15 +1,8 @@
 <?php
-
-  /*
-   * 
-   */
-
   /**
    * Description of Date
-   *
-   * @author suleyman [at] melikoglu.info
    */
-  class OS_XGrid_Zend_Datafield_Date extends XGrid_DataField_Abstract {
+  class XGrid_Zend_Datafield_Date extends XGrid_DataField_Abstract {
    
       private $_format = "dd/MM/yyyy hh:mm";
       
