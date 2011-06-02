@@ -19,7 +19,7 @@ class DateTimeTest extends BaseTestCase {
 
     public function testBasicUsageFailScenerio() {
         $data = new stdClass();
-        $data->theDate = strtotime("illegal date");
+        $data->datetime = strtotime("illegal date");
 
         $instance = new XGrid_DataField_DateTime();
         $instance->addKey("datetime");
