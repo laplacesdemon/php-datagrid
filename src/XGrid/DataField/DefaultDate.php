@@ -7,7 +7,7 @@
    */
   class XGrid_DataField_DefaultDate extends XGrid_DataField_Abstract {
    
-      private $_format = "d.m.Y i:s";
+      private $_format = "d.m.Y";
       
       public function __construct($key = null) {
           if(!is_null($key)) $this->setKey ($key);
