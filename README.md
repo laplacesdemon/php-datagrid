@@ -61,27 +61,54 @@ echo $grid;
 If you need pagination, you can set pagination parameters like following
 
 <pre>
-          $grid = new XGrid(array(
-              'pagination' => array(
-                  'currentPage' => (isset($_GET['p'])) ? $_GET['p'] : 1 ,
-                  'perPage' => 2,
-                  'baseUrl' => ''
-              )
-          ));
-          $grid->addField("name", "Name", XGrid_DataField::TEXT);
-          $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
-          $data = array(
-              array("name" => "Value 01", "surname" => "Value 00"),
-              array("name" => "Value 02", "surname" => "Value 00"),
-              array("name" => "Value 03", "surname" => "Value 00"),
-              array("name" => "Value 04", "surname" => "Value 00"),
-              array("name" => "Value 11", "surname" => "Value 12"),
-              array("name" => "Value 21", "surname" => "Value 22")
-          );
-          $dataSource = new XGrid_DataSource_Array($data);
-          $grid->setDataSource($dataSource);
+$grid = new XGrid(array(
+  'pagination' => array(
+      'currentPage' => (isset($_GET['p'])) ? $_GET['p'] : 1 ,
+      'perPage' => 2,
+      'baseUrl' => ''
+  )
+));
+$grid->addField("name", "Name", XGrid_DataField::TEXT);
+$grid->addField("surname", "SurName", XGrid_DataField::TEXT);
+$data = array(
+  array("name" => "Value 01", "surname" => "Value 00"),
+  array("name" => "Value 02", "surname" => "Value 00"),
+  array("name" => "Value 03", "surname" => "Value 00"),
+  array("name" => "Value 04", "surname" => "Value 00"),
+  array("name" => "Value 11", "surname" => "Value 12"),
+  array("name" => "Value 21", "surname" => "Value 22")
+);
+$dataSource = new XGrid_DataSource_Array($data);
+$grid->setDataSource($dataSource);
 
-          echo $grid;
+echo $grid;
+</pre>
+
+Setting pagination values in the alternative way. This example also shows the doctrine data source usage.
+
+<pre>
+// prepare pagination values. They might depend on your application.
+$currentPage = 3;
+$perPage = 2;
+$range = 6;
+$type = XGrid_Plugin_Pagination::SLIDING;
+
+$paginator = new XGrid_Plugin_DefaultPaginator();
+$paginator->setCurrentPage($currentPage);
+$paginator->setItemCountPerPage($perPage);
+$paginator->setType($type);
+$paginator->setRange($range);
+
+$xgrid = new XGrid();
+
+// set the data source
+$query = Doctrine_Query::create()->from('KuleUser');
+$xgrid->setDataSource(new XGrid_DataSource_Doctrine($query));
+
+// set the pagination plugin
+$xgrid->registerPlugin($paginator);
+
+echo $xgrid;
 </pre>
 
 Conventions and Coding Standard:
