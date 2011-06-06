@@ -22,17 +22,13 @@
 
       public function setDisplayText($displayText) {
           $this->_displayText = $displayText;
+          return $this;
       }
 
       public function getValue($object) {
           $value = parent::getValue($object);
           
           $atts = '';
-          
-          if (empty($this->_displayText)) {
-              $this->_displayText = $value;
-          }
-
           foreach ($this->_attributes as $key => $val) {
               $atts .= $key . '="' . $val . '" ';
           }
@@ -42,8 +38,9 @@
           } else if (! in_array('href', array_keys($this->_attributes))) {
               $atts = 'href="' . $value . '" ' . $atts;
           }
-          
-          return '<a ' . trim($atts) . '>' . $this->_displayText . '</a>';
+
+          $displayText = ($this->_displayText) ? $this->_displayText : $value;
+          return '<a ' . trim($atts) . '>' . $displayText . '</a>';
       }
   
   }
