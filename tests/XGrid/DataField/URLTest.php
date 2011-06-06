@@ -8,10 +8,19 @@ class URLTest extends BaseTestCase {
 
     public function testBasicUsage() {
         $data = new stdClass();
-        $data->text = 'Example URL';
+        $data->url = 'http://example.com';
 
-        $instance = new XGrid_DataField_URL('text', array(
-            'href' => 'http://example.com',
+        $instance = new XGrid_DataField_URL('url');
+
+        $this->assertEquals('<a href="http://example.com">http://example.com</a>', $instance->getValue($data));
+    }
+
+    public function testComplexUsage() {
+        $data = new stdClass();
+        $data->url = 'http://example.com';
+
+        $instance = new XGrid_DataField_URL('url', array(
+            'displayText' => 'Example URL',
             'title' => 'Example URL'
         ));
 
