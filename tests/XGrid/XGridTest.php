@@ -160,8 +160,8 @@
           $tidyURLFields = new XGrid_DataField_URL();
           $tidyURLFields->registerOnRender(function(XGrid_DataField_Event $event) {
               $data = $event->getData();
+              $event->getDataField()->setDisplayText($data->name);
               $event->getDataField()->setAttributes(array(
-                  'displayText' => $data->name,
                   'title' => $data->name
               ));
               return $data->url;

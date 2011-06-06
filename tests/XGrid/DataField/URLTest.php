@@ -20,9 +20,9 @@ class URLTest extends BaseTestCase {
         $data->url = 'http://example.com';
 
         $instance = new XGrid_DataField_URL('url', array(
-            'displayText' => 'Example URL',
             'title' => 'Example URL'
         ));
+        $instance->setDisplayText('Example URL');
 
         $this->assertEquals('<a href="http://example.com" title="Example URL">Example URL</a>', $instance->getValue($data));
     }
