@@ -157,7 +157,7 @@
           $grid->addField("name", "Name", XGrid_DataField::TEXT);
           $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
           $grid->addField("url", "Raw URL", XGrid_DataField::URL);
-          $tidyURLFields = new XGrid_DataField_URL();
+          $tidyURLFields = new XGrid_DataField_Url();
           $tidyURLFields->registerOnRender(function(XGrid_DataField_Event $event) {
               $data = $event->getData();
               $event->getDataField()->setDisplayText($data->name);

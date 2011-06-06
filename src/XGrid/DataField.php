@@ -18,7 +18,7 @@
       const CHECKBOX    = "XGrid_DataField_Checkbox";
       const DATETIME    = "XGrid_DataField_DateTime";
       const IMAGE    = "XGrid_DataField_Image";
-      const URL         = "XGrid_DataField_URL";
+      const URL         = "XGrid_DataField_Url";
       
       /**
        * Factory method to create datafield instances

@@ -5,7 +5,7 @@
    * 
    * @author Onur Yaman <onuryaman@gmail.com>
    */
-  class XGrid_Datafield_URL extends XGrid_DataField_Abstract {
+  class XGrid_DataField_Url extends XGrid_DataField_Abstract {
    
       private $_attributes;
       private $_displayText;
