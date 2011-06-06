@@ -146,19 +146,30 @@
       }
       
       public function testDispatchCustomAttributes() {
-          $expected = "<table class='myTableClass'><thead><tr><th>Name</th><th>SurName</th></tr></thead>";
+          $expected = "<table class='myTableClass'><thead><tr><th>Name</th><th>SurName</th><th>Raw URL</th><th>Tidy URL</th></tr></thead>";
           $expected .= "<tbody>";
-          $expected .= "<tr><td>Value 11</td><td>Value 12</td></tr>";
-          $expected .= "<tr><td>Value 21</td><td>Value 22</td></tr>";
+          $expected .= "<tr><td>Value 11</td><td>Value 12</td><td><a href=\"http://example.com\">http://example.com</a></td><td><a href=\"http://example.com\" title=\"Value 11\">Value 11</a></td></tr>";
+          $expected .= "<tr><td>Value 21</td><td>Value 22</td><td><a href=\"http://example2.com\">http://example2.com</a></td><td><a href=\"http://example2.com\" title=\"Value 21\">Value 21</a></td></tr>";
           $expected .= "</tbody>";
           $expected .= "<tfoot></tfoot></table>";
           
           $grid = new XGrid();
           $grid->addField("name", "Name", XGrid_DataField::TEXT);
           $grid->addField("surname", "SurName", XGrid_DataField::TEXT);
+          $grid->addField("url", "Raw URL", XGrid_DataField::URL);
+          $tidyURLFields = new XGrid_DataField_Url();
+          $tidyURLFields->registerOnRender(function(XGrid_DataField_Event $event) {
+              $data = $event->getData();
+              $event->getDataField()->setDisplayText($data->name);
+              $event->getDataField()->setAttributes(array(
+                  'title' => $data->name
+              ));
+              return $data->url;
+          });
+          $grid->addField('tidyURLs', 'Tidy URL', $tidyURLFields);
           $data = array(
-              array("name" => "Value 11", "surname" => "Value 12"),
-              array("name" => "Value 21", "surname" => "Value 22")
+              array("name" => "Value 11", "surname" => "Value 12", "url" => "http://example.com"),
+              array("name" => "Value 21", "surname" => "Value 22", "url" => "http://example2.com")
           );
           $dataSource = new XGrid_DataSource_Array($data);
           $grid->setDataSource($dataSource);

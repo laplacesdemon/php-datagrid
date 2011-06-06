@@ -189,7 +189,6 @@
           }
           
           if($key instanceof XGrid_DataField_LinkedList) {
-              
               if(is_null($key->getNext())) 
                   return (isset($object->{$key->getKey()})) ? 
                     $this->filter($object->{$key->getKey()}, $object) : $this->getDefaultText();

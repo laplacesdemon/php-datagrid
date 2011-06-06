@@ -12,3 +12,4 @@ function __autoload($class_name) {
     $fileName = implode("/", $tokens);
     include_once "../src/" . $fileName . '.php';
 }
+spl_autoload_register('__autoload');
