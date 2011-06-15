@@ -54,7 +54,7 @@ $data = array(
 );
 $dataSource = new XGrid_DataSource_Array($data);
 $grid->setDataSource($dataSource);
-$grid->dispatch();
+$grid->dispatch(); // the dispatch method is also called by the __toString magic function
 echo $grid;
 </pre>
 
