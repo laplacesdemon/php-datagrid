@@ -26,37 +26,40 @@
        * @var array
        */
       protected $_plugins = array();
-      
       /**
        * Collection of XGrid_DataField_Abstract objects
        * @var array
        */
       protected $_dataFields;
-      
       /**
        * The data adapter reference
        * @var XGrid_DataSource_Interface
        */
       protected $_dataSource;
-      
       /**
        * The crud strategy for inserting updating and deleting the data
        * @todo 
        * @var XGrid_CrudStrategy_Interface
        */
       protected $_crudStrategy;
-      
       /**
        * The html structure helper
        * @var XGrid_HtmlHelper_CollectionInterface
        */
       private $_htmlHelper = null;
-      
       /**
        * Notifies that the aookication is dispatched or not
        * @var type 
        */
       private $_isDispatched = false;
+      /**
+       * The debug mode determines whether the grid throws exceptions or not. 
+       * If debug mode is false than it returns no output (or minimal output) 
+       * when an error occurs
+       * 
+       * @var boolean
+       */
+      private $_debugMode = false;
 
       /**
        * The constructor
@@ -67,7 +70,7 @@
           $this->_initOptions($options);
           $this->init();
       }
-      
+
       /**
        * Setting optional parameters for easy instantiation
        * @param type $options 
@@ -77,33 +80,33 @@
           $params = array(
               'htmlHelper' => new XGrid_HtmlHelper_Default()
           );
-          
+
           // override default parameters with the options
-          if($options)
-            $params = array_merge($params, $options);
-          
+          if ($options)
+              $params = array_merge($params, $options);
+
           // set html helper
           if ($params['htmlHelper'] instanceof XGrid_HtmlHelper_Interface)
               $this->_htmlHelper = $params['htmlHelper'];
           else
               throw new XGrid_Exception(
                       'HtmlHelper should be an instance of XGrid_HtmlHelper_Interface');
-          
+
           // set optional pagination plug in
-          if(isset($params['pagination'])) {
-              $paginator = (isset($params['pagination']['paginator']) && 
-                                $params['pagination']['paginator'] instanceof XGrid_Plugin_Abstract) ? 
-                    $params['pagination']['paginator'] :
-                    new XGrid_Plugin_DefaultPaginator();
-              
+          if (isset($params['pagination'])) {
+              $paginator = (isset($params['pagination']['paginator']) &&
+                      $params['pagination']['paginator'] instanceof XGrid_Plugin_Abstract) ?
+                      $params['pagination']['paginator'] :
+                      new XGrid_Plugin_DefaultPaginator();
+
               $currentPage = (isset($params['pagination']['currentPage'])) ?
-                        $params['pagination']['currentPage'] : 1;
+                      $params['pagination']['currentPage'] : 1;
 
               $perPage = (isset($params['pagination']['perPage'])) ? $params['pagination']['perPage'] : 20;
               $range = (isset($params['pagination']['range'])) ? $params['pagination']['range'] : 6;
               $baseUrl = (isset($params['pagination']['baseUrl'])) ? $params['pagination']['baseUrl'] : "";
               $type = (isset($params['pagination']['baseUrl'])) ? $params['pagination']['baseUrl'] : XGrid_Plugin_Pagination::SLIDING;
-              
+
               $paginator->setCurrentPage($currentPage);
               $paginator->setItemCountPerPage($perPage);
               $paginator->setRange($range);
@@ -111,7 +114,6 @@
               $paginator->setBaseUrl($baseUrl);
               $this->registerPlugin($paginator);
           }
-          
       }
 
       /**
@@ -164,6 +166,29 @@
           return $this;
       }
 
+      /**
+       * The debug mode determines whether the grid throws exceptions or not. 
+       * If debug mode is false than it returns no output (or minimal output) 
+       * when an error occurs
+       * 
+       * @param boolean $mode
+       * @return XGrid 
+       */
+      public function setDebugMode($mode) {
+          $this->_debugMode = $mode;
+          return $this;
+      }
+
+      /**
+       * Returns the xgrid debugging state. if it's not in the debug state then 
+       * no exceptions will throwed. 
+       * 
+       * @return boolean 
+       */
+      public function isDebugMode() {
+          return $this->_debugMode;
+      }
+
       public function isDispatched() {
           return $this->_isDispatched;
       }
@@ -177,10 +202,10 @@
           if (is_null($this->getDataSource()))
               throw new XGrid_Exception("No data source found. Please set one");
 
-          if(empty ($this->_dataFields)) {
+          if (empty($this->_dataFields)) {
               $this->_autoLoadDataFields();
           }
-          
+
           $this->preDispatch();
           $this->_htmlHelper->setData($this->getDataSource());
           $this->_htmlHelper->setColumns($this->getDataFields());
@@ -190,7 +215,7 @@
           $this->_isDispatched = true;
           return $this;
       }
-      
+
       /**
        * check if at least one data field is added. otherwise add datafields 
        * from the data source automatically
@@ -305,8 +330,15 @@
        */
       public function __toString() {
           if (!$this->isDispatched()) {
-              //throw new XGrid_Exception("XGrid is not dispatched");
-              $this->dispatch();
+              if ($this->isDebugMode()) {
+                  $this->dispatch();
+              } else {
+                  try {
+                      $this->dispatch();
+                  } catch (Exception $e) {
+                      return 'XGrid: An Error occurred.';
+                  }
+              }
           }
 
           return $this->_htmlHelper->render();
