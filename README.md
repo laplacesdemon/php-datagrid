@@ -44,7 +44,7 @@ require 'XGrid/Config.php';
 spl_autoload_register(array('XGrid_Config', 'xgridAutoload'));
 </pre>
 
-A standard way of using XGrid is following
+Following is the standard way of using XGrid
 
 <pre>
 $grid = new XGrid();
