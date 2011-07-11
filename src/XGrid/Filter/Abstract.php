@@ -23,6 +23,9 @@
           $theField = substr($val, $pos, $length);
           
           if($theField){
+              if(!isset($row->{$theField}))
+                  return $val;
+              
               $ret = str_replace('{%' . $theField . '}', $row->{$theField}, $val); 
               if(strpos($ret, '{%'))
                   return $this->_filter($ret, $row);
