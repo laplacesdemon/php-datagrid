@@ -2,7 +2,7 @@
 ==================================================
 
 The XGrid provides tabular data grid with a flexible/extensible API. 
-The main goal of the XGrid is the maintainablility and reuse. So I have focused on the design. 
+The main goal of the XGrid is to keep source code maintainable and reusable.
 The development is in phase1 stage. Contributions are welcome. 
 
 Please see the tests/XGrid/UsageTest.php file to find out how it works.
@@ -44,7 +44,7 @@ require 'XGrid/Config.php';
 spl_autoload_register(array('XGrid_Config', 'xgridAutoload'));
 </pre>
 
-A standard way of using XGrid is following
+Following is the standard way of using XGrid
 
 <pre>
 $grid = new XGrid();
