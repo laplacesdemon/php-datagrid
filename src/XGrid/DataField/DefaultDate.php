@@ -23,6 +23,13 @@
       
       public function getValue($object) {
           $value = parent::getValue($object);
+          
+          // if the date value is an instance of the generic DateTime class, we
+          // shall use the corresponding timestamp value.
+          if ($value instanceof DateTime) {
+              $value = $value->getTimestamp();
+          }
+          
           if($this->_isTimestamp($value)) {
               return date($this->_format, $value);
           } else {
