@@ -25,9 +25,13 @@ Pagination
 Features of phase2:
 -------------------
 
-Search Plugin
+Search Plugin: The plugin / strategy to perform search into the data. Array and Doctrine adapters shall be developed in the initial version.
 
-Sorting Plugin
+Sorting Plugin: The plugin to sort data by columns.
+
+CRUD Plugin: The plugin / strategy to handle Create/Update/Delete operations
+
+Preferences class: The encapsulation of the XGrid properties. XGrid should accept this class in the constructor. It shall work as default options of the XGrid.
 
 Autoloading:
 ------------
@@ -115,3 +119,21 @@ Conventions and Coding Standard:
 --------------------------------
 
 XGrid uses the coding standard as described in the following url: http://framework.zend.com/manual/en/coding-standard.html
+
+Change Log:
+-----------
+
+1.0:
+===
+
+initial version 
+
+1.1:
+---
+
+Minor bugs, Support for nested data structure for the data field
+
+1.2:
+---
+
+"Doctrine 2" data source support.
