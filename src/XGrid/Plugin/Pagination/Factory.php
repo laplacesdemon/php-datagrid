@@ -30,6 +30,9 @@
               case $datasource instanceof XGrid_DataSource_Doctrine:
                   $ins = new XGrid_Plugin_Pagination_Doctrine($datasource);
                   break;
+              case $datasource instanceof XGrid_DataSource_Doctrine2:
+                  $ins = new XGrid_Plugin_Pagination_Doctrine2($datasource);
+                  break;
           }
           
           if(is_null($ins)) {

@@ -336,7 +336,7 @@
                   try {
                       $this->dispatch();
                   } catch (Exception $e) {
-                      return 'XGrid: An Error occurred.';
+                      return 'XGrid: An Error occurred. Details: ' . $e->getMessage();
                   }
               }
           }

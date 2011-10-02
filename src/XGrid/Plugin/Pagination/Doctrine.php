@@ -11,7 +11,7 @@
    */
   class XGrid_Plugin_Pagination_Doctrine extends XGrid_Plugin_Pagination_Abstract {
 
-      private $_datasource;
+      protected $_datasource;
 
       public function __construct(XGrid_DataSource_Interface $datasource) {
           $this->_datasource = $datasource;

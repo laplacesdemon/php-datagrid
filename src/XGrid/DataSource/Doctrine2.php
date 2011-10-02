@@ -25,7 +25,13 @@ class XGrid_DataSource_Doctrine2 implements XGrid_DataSource_Interface {
             return $this;
         } elseif ($this->_query instanceof \Doctrine\ORM\Query) {
             // @todo is execution ok here? performance issues may arise!
-            $this->_rowCount = $this->_query->execute()->rowCount();
+            $result = $this->_query->execute();
+
+            if ($result) {
+               $this->_rowCount = count($result); 
+            } else {
+               $this->_rowCount = 0;
+            }
         } else {
             throw new XGrid_Exception('Invalid doctrine query', 500);
         }
