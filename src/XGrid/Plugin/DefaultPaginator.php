@@ -48,6 +48,21 @@
        */
       private $_pageUrlIdentifier = "p";
 
+      /**
+       * the range is available for some pagination types like "sliding"
+       * 
+       * @param int $currentPage
+       * @param int $perPage
+       * @param int $range
+       * @param string $type 
+       */
+      public function __construct($currentPage = 1, $perPage = 10, $range = 6, $type = XGrid_Plugin_Pagination::SLIDING) {
+          $this->setCurrentPage($currentPage);
+          $this->setItemCountPerPage($perPage);
+          $this->setRange($range);
+          $this->setType($type);
+      }
+      
       public function getItemCountPerPage() {
           return $this->_itemCountPerPage;
       }
