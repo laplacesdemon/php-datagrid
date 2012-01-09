@@ -1,9 +1,12 @@
+XGrid Extensions
+================
+
 The XGrid extensions are library dependent files that is maintained outside of XGrid.
 Add this folder to your include path 
 Contributions are welcome
 
 Examples
-========
+--------
 
 Custom zend data form field
 
