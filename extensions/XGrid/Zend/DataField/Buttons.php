@@ -1,6 +1,22 @@
 <?php
   /**
-   * Description of Buttons
+   * Adds an anchor link as a new datafield
+   * @usage
+    	  $buttons = new OS_XGrid_Zend_DataField_Buttons();
+          $buttons->addKey('id')
+            ->setButton(new OS_XGrid_Zend_Filter_Link($this->view, 
+                      array(
+                          'controller' => 'advert', 
+                          'lang' => $this->lang,
+                          'action' => 'delete',
+                          'id' => '{%id}'
+                      ), array('class' => 'delete'), $this->translate->_("Sil")
+                  ))
+            // alternatively you can add the link with the following method.
+            //->setZendLink($this->view, 'Details', 'details', 'id', array('class' => 'details'))
+            ->setSeperator(' | ');
+
+			$xgrid->addField('buttons', $this->translate->_('Actions'), $buttons);
    *
    */
   class XGrid_Zend_DataField_Buttons extends XGrid_DataField_Abstract {
@@ -18,7 +34,7 @@
       }
       
       public function setZendLink(Zend_View $view, $title, $action = 'edit', $dataField = 'id', $attributes = array()) {
-          $filter = new XGrid_Filter_Zend_Link($view, 
+          $filter = new XGrid_Zend_Filter_Link($view, 
                       array(
                           'action' => $action,
                           'id' => "{%$dataField}"

@@ -1,6 +1,14 @@
 <?php
   /**
-   * Description of e
+   * Creates an anchor link html
+   * @usage
+			 new OS_XGrid_Zend_Filter_Link($this->view, 
+             array(
+                 'controller' => 'advert', 
+                 'lang' => $this->lang,
+                 'action' => 'delete',
+                 'id' => '{%id}'
+             )
    *
    */
   class XGrid_Zend_Filter_Link extends XGrid_Filter_Abstract {
@@ -10,10 +18,17 @@
       private $_attributes;
       private $_linkText;
 
-
-      public function __construct(Zend_View $view, $arr, $attributes = array(), $linkText = null) {
+	  /**
+		* Creates the anchor link html structure
+		*
+		* @param Zend_View $view | the zend view
+		* @param array $routerParams | the router params (controller, action, etc)
+		* @param array $attributes | the html attributes
+		* @param string $linkText | the visible text of the anchor link
+		*/
+      public function __construct(Zend_View $view, $routerParams, $attributes = array(), $linkText = null) {
           $this->_view = $view;
-          $this->_arr = $arr;
+          $this->_arr = $routerParams;
           $this->_attributes = $attributes;
           $this->_linkText = $linkText;
       }
