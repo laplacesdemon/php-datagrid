@@ -1,7 +1,10 @@
-[XGrid] - A Flexible Data Grid 
-==================================================
+=====================================
+[php-datagrid] - A Flexible Data Grid 
+=====================================
 
-The XGrid provides tabular data grid with a flexible/extensible API. 
+Formerly known as XGrid.
+
+Php Datagrid provides tabular data grid with a flexible/extensible API. 
 The main goal of the XGrid is to keep source code maintainable and reusable.
 The development is in phase1 stage. Contributions are welcome. 
 
@@ -137,3 +140,8 @@ Minor bugs, Support for nested data structure for the data field
 ---
 
 "Doctrine 2" data source support.
+
+1.3:
+----
+
+Renamed from XGrid to php-datagrid due to a name clash with a product developed by the Apple inc.
